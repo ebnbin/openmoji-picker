@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
+    id("kotlin-parcelize")
     `maven-publish`
 }
 
@@ -38,6 +39,7 @@ dependencies {
         }
         return "$id:$version"
     }
+    api(dependency("androidx.annotation:annotation"))
 }
 
 afterEvaluate {
