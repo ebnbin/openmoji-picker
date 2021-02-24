@@ -1,1 +1,5 @@
 include(":lib")
+//include(":eb")
+//project(":eb").projectDir = File("../eb/lib")
+//include(":eb-material")
+//project(":eb-material").projectDir = File("../eb-material/lib")

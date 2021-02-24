@@ -12,6 +12,8 @@ android {
     defaultConfig {
         minSdkVersion(versionMap.getValue("minSdkVersion").toInt())
         targetSdkVersion(versionMap.getValue("targetSdkVersion").toInt())
+        val proguardFiles = project.file("proguard").listFiles() ?: emptyArray()
+        consumerProguardFiles(*proguardFiles)
     }
     sourceSets {
         configureEach {
@@ -39,7 +41,13 @@ dependencies {
         }
         return "$id:$version"
     }
-    api(dependency("androidx.annotation:annotation"))
+    api("com.github.ebnbin:eb:0.0.19")
+//    api(project(":eb"))
+    api("com.github.ebnbin:eb-material:0.0.5")
+//    api(project(":eb-material"))
+    implementation(dependency("androidx.annotation:annotation"))
+    implementation(dependency("com.google.code.gson:gson"))
+    implementation(dependency("com.github.bumptech.glide:glide"))
 }
 
 afterEvaluate {
