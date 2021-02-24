@@ -42,9 +42,9 @@ dependencies {
         }
         return "$id:$version"
     }
-    api("com.github.ebnbin:eb:0.0.19")
+    api("com.github.ebnbin:eb:0.0.20")
 //    api(project(":eb"))
-    api("com.github.ebnbin:eb-material:0.0.5")
+    api("com.github.ebnbin:eb-material:0.0.6")
 //    api(project(":eb-material"))
     implementation(dependency("androidx.annotation:annotation"))
     implementation(dependency("com.google.code.gson:gson"))
