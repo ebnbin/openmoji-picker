@@ -11,6 +11,8 @@ import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 class OpenMojiPickerFragment : Fragment() {
     private val viewModel: OpenMojiPickerViewModel by viewModels()
 
+    private val spanSizeGridLayoutManagerViewModel: SpanSizeGridLayoutManagerViewModel by viewModels()
+
     private lateinit var binding: OpenmojiPickerFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -24,7 +26,7 @@ class OpenMojiPickerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        layoutManager = OpenMojiPickerLayoutManager(requireContext(), viewModel)
+        layoutManager = OpenMojiPickerLayoutManager(requireContext(), spanSizeGridLayoutManagerViewModel)
         adapter = OpenMojiPickerAdapter()
         adapter.submitList(viewModel.openMojiPickerItemList)
 
