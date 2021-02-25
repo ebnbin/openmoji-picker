@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 
 class OpenMojiPickerFragment : Fragment() {
@@ -19,13 +18,13 @@ class OpenMojiPickerFragment : Fragment() {
         return binding.root
     }
 
-    private lateinit var layoutManager: GridLayoutManager
+    private lateinit var layoutManager: OpenMojiPickerLayoutManager
 
     private lateinit var adapter: OpenMojiPickerAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        layoutManager = GridLayoutManager(requireContext(), 5)
+        layoutManager = OpenMojiPickerLayoutManager(requireContext(), viewModel)
         adapter = OpenMojiPickerAdapter()
         adapter.submitList(viewModel.openMojiPickerItemList)
 
