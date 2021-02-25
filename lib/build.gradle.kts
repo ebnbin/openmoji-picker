@@ -32,6 +32,10 @@ android {
         jvmTarget = "1.8"
         moduleName = "dev.ebnbin.openmojipicker"
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -47,6 +51,13 @@ dependencies {
     api("com.github.ebnbin:eb-material:0.0.6")
 //    api(project(":eb-material"))
     implementation(dependency("androidx.annotation:annotation"))
+    implementation(dependency("androidx.lifecycle:lifecycle-viewmodel-ktx"))
+    implementation(dependency("androidx.lifecycle:lifecycle-livedata-ktx"))
+    implementation(dependency("androidx.activity:activity-ktx"))
+    implementation(dependency("androidx.fragment:fragment-ktx"))
+    implementation(dependency("androidx.coordinatorlayout:coordinatorlayout"))
+    implementation(dependency("androidx.constraintlayout:constraintlayout"))
+    implementation(dependency("androidx.recyclerview:recyclerview"))
     implementation(dependency("com.google.code.gson:gson"))
     implementation(dependency("com.github.bumptech.glide:glide"))
 }
