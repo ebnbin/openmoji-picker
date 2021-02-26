@@ -3,32 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/openmoji_picker_item_emoji">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/openmoji_picker_card_view"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/openmoji_picker_emoji"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/selectableItemBackground"
-        android:focusable="true"
-        android:clickable="true"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="4dp">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/openmoji_picker_item_emoji">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/openmoji_picker_emoji"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </FrameLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
