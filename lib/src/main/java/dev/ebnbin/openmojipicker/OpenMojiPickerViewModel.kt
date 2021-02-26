@@ -1,5 +1,6 @@
 package dev.ebnbin.openmojipicker
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -38,4 +39,6 @@ internal class OpenMojiPickerViewModel : ViewModel() {
         }
         list
     }
+
+    val selectedPosition: MutableLiveData<Int?> = MutableLiveData(null)
 }

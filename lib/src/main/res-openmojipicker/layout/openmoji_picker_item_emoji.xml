@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/openmoji_picker_card_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/selectableItemBackground"
@@ -16,10 +17,17 @@
         app:cardCornerRadius="0dp"
         app:cardElevation="4dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/openmoji_picker_emoji"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/openmoji_picker_item_emoji">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/openmoji_picker_emoji"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </FrameLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

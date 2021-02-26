@@ -2,18 +2,13 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
 
-    <TextView
-        android:id="@+id/openmoji_picker_group"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:gravity="center_vertical"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:background="?attr/colorPrimary"/>
+    <com.google.android.material.chip.Chip
+        android:id="@+id/openmoji_picker_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

@@ -11,7 +11,10 @@ import dev.ebnbin.eb.notNull
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemEmojiBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemGroupBinding
 
-internal class OpenMojiPickerAdapter : ListAdapter<OpenMojiPickerItem, BindingViewHolder<ViewBinding>>(
+internal class OpenMojiPickerAdapter(
+    private val viewModel: OpenMojiPickerViewModel,
+    private val listener: Listener,
+) : ListAdapter<OpenMojiPickerItem, BindingViewHolder<ViewBinding>>(
     object : DiffUtil.ItemCallback<OpenMojiPickerItem>() {
         override fun areItemsTheSame(oldItem: OpenMojiPickerItem, newItem: OpenMojiPickerItem): Boolean {
             return oldItem == newItem
@@ -36,7 +39,7 @@ internal class OpenMojiPickerAdapter : ListAdapter<OpenMojiPickerItem, BindingVi
             OpenMojiPickerItem.ViewType.GROUP -> {
                 val binding = holder.binding as OpenmojiPickerItemGroupBinding
                 val group = getItem(position).group.notNull()
-                binding.openmojiPickerGroup.text = group
+                binding.openmojiPickerChip.text = group
             }
             OpenMojiPickerItem.ViewType.EMOJI -> {
                 val binding = holder.binding as OpenmojiPickerItemEmojiBinding
@@ -44,11 +47,19 @@ internal class OpenMojiPickerAdapter : ListAdapter<OpenMojiPickerItem, BindingVi
                 Glide.with(binding.openmojiPickerEmoji)
                     .load(openMoji.drawableId)
                     .into(binding.openmojiPickerEmoji)
+                binding.openmojiPickerCardView.isSelected = position == viewModel.selectedPosition.value
+                binding.openmojiPickerCardView.setOnClickListener {
+                    listener.emojiOnClick(binding, openMoji, position)
+                }
             }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).viewType.ordinal
+    }
+
+    interface Listener {
+        fun emojiOnClick(binding: OpenmojiPickerItemEmojiBinding, openMoji: OpenMoji, position: Int)
     }
 }
