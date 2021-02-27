@@ -17,7 +17,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
     val openMojiPickerItemList: List<OpenMojiPickerItem> by lazy {
         val map = linkedMapOf<String, MutableList<OpenMoji>>()
         openMojiList.forEach {
-            val group = "${it.group},${it.subgroups}"
+            val group = "${it.group}\n${it.subgroups}"
             map[group] = (map.getOrDefault(group, mutableListOf())).also { openMojiList -> openMojiList.add(it) }
         }
         val list = mutableListOf<OpenMojiPickerItem>()
@@ -25,7 +25,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
             list.add(
                 OpenMojiPickerItem(
                     viewType = OpenMojiPickerItem.ViewType.GROUP,
-                    group = "$group,${openMojiList.size}",
+                    group = "$group#${openMojiList.size}",
                 ),
             )
             openMojiList.forEach {
