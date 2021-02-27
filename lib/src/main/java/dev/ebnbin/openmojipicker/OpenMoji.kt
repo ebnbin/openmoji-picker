@@ -30,7 +30,7 @@ data class OpenMoji(
 
     val drawableId: Int
         get() = drawableIdCache ?: kotlin.runCatching {
-            val name = "openmoji_${hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}_48"
+            val name = "openmoji_${hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}"
             R.drawable::class.java.getField(name).getInt(null)
         }.getOrDefault(0).also {
             drawableIdCache = it
