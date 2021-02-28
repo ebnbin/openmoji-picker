@@ -1,22 +1,31 @@
 package dev.ebnbin.openmojipicker
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dev.ebnbin.eb.app
+import dev.ebnbin.eb.notNull
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 internal class OpenMojiPickerViewModel : ViewModel() {
-    private val openMojiList: List<OpenMoji> by lazy {
-        Gson().fromJson<List<OpenMoji>>(
-            app.resources.openRawResource(R.raw.openmoji).bufferedReader(),
-            object : TypeToken<List<OpenMoji>>() {}.type,
-        ).filter { it.skintone.isEmpty() }
+    private val openMojiList: MutableLiveData<List<OpenMoji>> = MutableLiveData(emptyList())
+
+    fun init() {
+        viewModelScope.launch {
+            openMojiList.value = withContext(Dispatchers.IO) {
+                Gson().fromJson<List<OpenMoji>>(
+                    app.resources.openRawResource(R.raw.openmoji).bufferedReader(),
+                    object : TypeToken<List<OpenMoji>>() {}.type,
+                ).filter { it.skintone.isEmpty() }
+            }
+        }
     }
 
-    private val openMojiMap: Map<OpenMojiGroup, Map<OpenMojiSubgroup, List<OpenMoji>>> by lazy {
+    private val openMojiMap: LiveData<Map<OpenMojiGroup, Map<OpenMojiSubgroup, List<OpenMoji>>>> = Transformations.map(openMojiList) {
         val map = linkedMapOf<String, LinkedHashMap<String, MutableList<OpenMoji>>>()
-        openMojiList.forEach {
+        openMojiList.value.notNull().forEach {
             map[it.group] = (map[it.group] ?: linkedMapOf()).also { subgroupMap ->
                 subgroupMap[it.subgroups] = (subgroupMap[it.subgroups] ?: mutableListOf()).also { openMojiList ->
                     openMojiList.add(it)
@@ -44,10 +53,10 @@ internal class OpenMojiPickerViewModel : ViewModel() {
             }
     }
 
-    val openMojiPickerItemList: List<OpenMojiPickerItem> by lazy {
+    val openMojiPickerItemList: LiveData<List<OpenMojiPickerItem>> = Transformations.map(openMojiMap) {
         val list = mutableListOf<OpenMojiPickerItem>()
         var index = 0
-        openMojiMap.forEach { (openMojiGroup, openMojiSubgroupMap) ->
+        openMojiMap.value.notNull().forEach { (openMojiGroup, openMojiSubgroupMap) ->
             list.add(
                 OpenMojiPickerItem(
                     viewType = OpenMojiPickerItem.ViewType.GROUP,
@@ -83,8 +92,8 @@ internal class OpenMojiPickerViewModel : ViewModel() {
         list
     }
 
-    val openMojiGroupList: List<OpenMojiPickerItem> by lazy {
-        openMojiPickerItemList.filter { it.viewType == OpenMojiPickerItem.ViewType.GROUP }
+    val openMojiGroupList: LiveData<List<OpenMojiPickerItem>> = Transformations.map(openMojiPickerItemList) {
+        openMojiPickerItemList.value.notNull().filter { it.viewType == OpenMojiPickerItem.ViewType.GROUP }
     }
 
     val selectedPosition: MutableLiveData<Int?> = MutableLiveData(null)

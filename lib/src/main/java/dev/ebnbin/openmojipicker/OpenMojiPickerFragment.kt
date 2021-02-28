@@ -40,11 +40,11 @@ internal class OpenMojiPickerFragment : Fragment(),
                     adapter.notifyItemChanged(selectedPosition)
                 }
             }
-            val spinnerItem = viewModel.openMojiGroupList.firstOrNull {
+            val spinnerItem = viewModel.openMojiGroupList.value.notNull().firstOrNull {
                 layoutManager.findFirstVisibleItemPosition() in it.group.notNull().indexRange
             }
             if (spinnerItem != null) {
-                val index = viewModel.openMojiGroupList.indexOf(spinnerItem)
+                val index = viewModel.openMojiGroupList.value.notNull().indexOf(spinnerItem)
                 if (index != -1 && index != binding.openmojiPickerSpinner.selectedItemPosition) {
                     byScroll = true
                     binding.openmojiPickerSpinner.setSelection(index)
@@ -70,7 +70,9 @@ internal class OpenMojiPickerFragment : Fragment(),
             }
         }
         adapter = OpenMojiPickerAdapter(viewModel, this)
-        adapter.submitList(viewModel.openMojiPickerItemList)
+        viewModel.openMojiPickerItemList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
 
         viewModel.selectedPosition.observe(viewLifecycleOwner) {
             if (it == null) {
@@ -86,9 +88,9 @@ internal class OpenMojiPickerFragment : Fragment(),
             it.adapter = adapter
             it.addOnScrollListener(onScrollListener)
         }
-        binding.openmojiPickerSpinner.let {
-            spinnerAdapter = OpenMojiPickerSpinnerAdapter(requireContext(), viewModel.openMojiGroupList)
-            it.adapter = spinnerAdapter
+        viewModel.openMojiGroupList.observe(viewLifecycleOwner) {
+            spinnerAdapter = OpenMojiPickerSpinnerAdapter(requireContext(), it)
+            binding.openmojiPickerSpinner.adapter = spinnerAdapter
         }
         binding.openmojiPickerToolbar.let {
             it.inflateMenu(R.menu.openmoji_picker_fragment_toolbar)
@@ -102,6 +104,8 @@ internal class OpenMojiPickerFragment : Fragment(),
         } else {
             binding.openmojiPickerExtendedFloatingActionButton.show()
         }
+
+        viewModel.init()
     }
 
     override fun onDestroyView() {
@@ -137,7 +141,7 @@ internal class OpenMojiPickerFragment : Fragment(),
             byScroll = false
             return
         }
-        val index = viewModel.openMojiPickerItemList.indexOf(spinnerAdapter.getItem(position))
+        val index = viewModel.openMojiPickerItemList.value.notNull().indexOf(spinnerAdapter.getItem(position))
         layoutManager.scrollToPositionWithOffset(index, 0)
     }
 
