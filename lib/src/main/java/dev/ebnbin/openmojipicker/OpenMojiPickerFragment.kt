@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import dev.ebnbin.eb.notNull
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
@@ -89,6 +90,12 @@ internal class OpenMojiPickerFragment : Fragment(),
             spinnerAdapter = OpenMojiPickerSpinnerAdapter(requireContext(), viewModel.openMojiGroupList)
             it.adapter = spinnerAdapter
         }
+        binding.openmojiPickerToolbar.let {
+            it.inflateMenu(R.menu.openmoji_picker_fragment_toolbar)
+            it.menu.findItem(R.id.openmoji_picker_filter).setOnMenuItemClickListener {
+                true
+            }
+        }
 
         if (viewModel.selectedPosition.value == null) {
             binding.openmojiPickerExtendedFloatingActionButton.hide()
@@ -102,7 +109,7 @@ internal class OpenMojiPickerFragment : Fragment(),
         super.onDestroyView()
     }
 
-    override fun emojiOnClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int) {
+    override fun openMojiOnClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int) {
         val selectedPosition = viewModel.selectedPosition.value
         if (selectedPosition == position) {
             viewModel.selectedPosition.value = null
@@ -113,6 +120,16 @@ internal class OpenMojiPickerFragment : Fragment(),
                 adapter.notifyItemChanged(selectedPosition)
             }
         }
+    }
+
+    override fun openMojiOnLongClick(
+        binding: OpenmojiPickerItemOpenmojiBinding,
+        openMoji: OpenMoji,
+        position: Int
+    ): Boolean {
+        Snackbar.make(this.binding.openmojiPickerCoordinatorLayout,
+            "${openMoji.emoji},${openMoji.hexcode}\n${openMoji.annotation}", Snackbar.LENGTH_INDEFINITE).show()
+        return true
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

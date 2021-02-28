@@ -36,6 +36,17 @@ data class OpenMoji(
             drawableIdCache = it
         }
 
+    @IgnoredOnParcel
+    private var iconDrawableIdCache: Int? = null
+
+    val iconDrawableId: Int
+        get() = iconDrawableIdCache ?: kotlin.runCatching {
+            val name = "openmoji_icon_${hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}"
+            R.drawable::class.java.getField(name).getInt(null)
+        }.getOrDefault(0).also {
+            iconDrawableIdCache = it
+        }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

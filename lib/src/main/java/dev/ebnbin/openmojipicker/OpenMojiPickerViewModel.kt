@@ -29,6 +29,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
                     group = groupEntry.key,
                     subgroupCount = groupEntry.value.size,
                     openMojiCount = groupEntry.value.asSequence().fold(0) { acc, entry -> acc + entry.value.size },
+                    openMoji = groupEntry.value.values.first().first(),
                 )
             }
             .mapValues { groupEntry ->
@@ -37,6 +38,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
                         group = groupEntry.key.group,
                         subgroup = subgroupEntry.key,
                         openMojiCount = subgroupEntry.value.size,
+                        openMoji = subgroupEntry.value.first(),
                     )
                 }
             }

@@ -52,7 +52,10 @@ internal class OpenMojiPickerAdapter(
                     .into(binding.openmojiPickerEmoji)
                 binding.root.isSelected = position == viewModel.selectedPosition.value
                 binding.openmojiPickerEmoji.setOnClickListener {
-                    listener.emojiOnClick(binding, openMoji, position)
+                    listener.openMojiOnClick(binding, openMoji, position)
+                }
+                binding.openmojiPickerEmoji.setOnLongClickListener {
+                    listener.openMojiOnLongClick(binding, openMoji, position)
                 }
             }
         }
@@ -63,6 +66,8 @@ internal class OpenMojiPickerAdapter(
     }
 
     interface Listener {
-        fun emojiOnClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int)
+        fun openMojiOnClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int)
+
+        fun openMojiOnLongClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int): Boolean
     }
 }

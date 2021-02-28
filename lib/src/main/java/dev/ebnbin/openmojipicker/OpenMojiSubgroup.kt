@@ -10,6 +10,7 @@ data class OpenMojiSubgroup(
     val group: String,
     val subgroup: String,
     val openMojiCount: Int,
+    val openMoji: OpenMoji,
 ) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
