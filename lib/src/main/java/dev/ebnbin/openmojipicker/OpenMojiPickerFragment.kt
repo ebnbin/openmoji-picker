@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemEmojiBinding
 
-class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
+class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener, AdapterView.OnItemSelectedListener {
     private val viewModel: OpenMojiPickerViewModel by viewModels()
 
     private val spanSizeGridLayoutManagerViewModel: SpanSizeGridLayoutManagerViewModel by viewModels()
@@ -39,6 +40,8 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
 
     private lateinit var adapter: OpenMojiPickerAdapter
 
+    private lateinit var spinnerAdapter: OpenMojiPickerSpinnerAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         layoutManager = OpenMojiPickerLayoutManager(requireContext(), spanSizeGridLayoutManagerViewModel)
@@ -58,6 +61,11 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
             it.layoutManager = layoutManager
             it.adapter = adapter
             it.addOnScrollListener(onScrollListener)
+        }
+        binding.openmojiPickerSpinner.let {
+            spinnerAdapter = OpenMojiPickerSpinnerAdapter(requireContext(), viewModel.openMojiGroupList)
+            it.adapter = spinnerAdapter
+            it.onItemSelectedListener = this
         }
 
         if (viewModel.selectedPosition.value == null) {
@@ -83,5 +91,11 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
                 adapter.notifyItemChanged(selectedPosition)
             }
         }
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 }

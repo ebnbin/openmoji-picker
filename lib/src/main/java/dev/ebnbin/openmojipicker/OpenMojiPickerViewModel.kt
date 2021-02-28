@@ -14,30 +14,59 @@ internal class OpenMojiPickerViewModel : ViewModel() {
         )
     }
 
-    val openMojiPickerItemList: List<OpenMojiPickerItem> by lazy {
-        val map = linkedMapOf<String, MutableList<OpenMoji>>()
+    private val openMojiMap: Map<OpenMojiGroup, Map<OpenMojiSubgroup, List<OpenMoji>>> by lazy {
+        val map = linkedMapOf<String, LinkedHashMap<String, MutableList<OpenMoji>>>()
         openMojiList.forEach {
-            val group = "${it.group}\n${it.subgroups}"
-            map[group] = (map.getOrDefault(group, mutableListOf())).also { openMojiList -> openMojiList.add(it) }
+            map[it.group] = (map[it.group] ?: linkedMapOf()).also { subgroupMap ->
+                subgroupMap[it.subgroups] = (subgroupMap[it.subgroups] ?: mutableListOf()).also { openMojiList ->
+                    openMojiList.add(it)
+                }
+            }
         }
+        map
+            .mapKeys { groupEntry ->
+                OpenMojiGroup(
+                    group = groupEntry.key,
+                    subgroupCount = groupEntry.value.size,
+                    openMojiCount = groupEntry.value.asSequence().fold(0) { acc, entry -> acc + entry.value.size },
+                )
+            }
+            .mapValues { groupEntry ->
+                groupEntry.value.mapKeys { subgroupEntry ->
+                    OpenMojiSubgroup(
+                        group = groupEntry.key.group,
+                        subgroup = subgroupEntry.key,
+                        openMojiCount = subgroupEntry.value.size,
+                    )
+                }
+            }
+    }
+
+    val openMojiPickerItemList: List<OpenMojiPickerItem> by lazy {
         val list = mutableListOf<OpenMojiPickerItem>()
-        map.forEach { (group, openMojiList) ->
-            list.add(
-                OpenMojiPickerItem(
-                    viewType = OpenMojiPickerItem.ViewType.GROUP,
-                    group = "$group#${openMojiList.size}",
-                ),
-            )
-            openMojiList.forEach {
+        openMojiMap.forEach { (_, openMojiSubgroupMap) ->
+            openMojiSubgroupMap.forEach { (openMojiSubgroup, openMojiList) ->
                 list.add(
                     OpenMojiPickerItem(
-                        viewType = OpenMojiPickerItem.ViewType.EMOJI,
-                        openMoji = it,
+                        viewType = OpenMojiPickerItem.ViewType.GROUP,
+                        group = openMojiSubgroup,
                     ),
                 )
+                openMojiList.forEach { openMoji ->
+                    list.add(
+                        OpenMojiPickerItem(
+                            viewType = OpenMojiPickerItem.ViewType.EMOJI,
+                            openMoji = openMoji
+                        ),
+                    )
+                }
             }
         }
         list
+    }
+
+    val openMojiGroupList: List<OpenMojiGroup> by lazy {
+        openMojiMap.keys.toList()
     }
 
     val selectedPosition: MutableLiveData<Int?> = MutableLiveData(null)

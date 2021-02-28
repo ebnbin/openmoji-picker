@@ -1,6 +1,7 @@
 package dev.ebnbin.openmojipicker
 
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
@@ -39,7 +40,8 @@ internal class OpenMojiPickerAdapter(
             OpenMojiPickerItem.ViewType.GROUP -> {
                 val binding = holder.binding as OpenmojiPickerItemGroupBinding
                 val group = getItem(position).group.notNull()
-                binding.openmojiPickerChip.text = group
+                binding.openmojiPickerDivider.isVisible = position != 0
+                binding.openmojiPickerChip.text = "${group.group}#${group.subgroup}#${group.openMojiCount}"
             }
             OpenMojiPickerItem.ViewType.EMOJI -> {
                 val binding = holder.binding as OpenmojiPickerItemEmojiBinding
