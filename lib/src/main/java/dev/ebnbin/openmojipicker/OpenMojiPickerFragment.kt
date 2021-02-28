@@ -12,7 +12,9 @@ import dev.ebnbin.eb.notNull
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 
-class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener, AdapterView.OnItemSelectedListener {
+internal class OpenMojiPickerFragment : Fragment(),
+    OpenMojiPickerAdapter.Listener,
+    AdapterView.OnItemSelectedListener {
     private val viewModel: OpenMojiPickerViewModel by viewModels()
 
     private val spanSizeGridLayoutManagerViewModel: SpanSizeGridLayoutManagerViewModel by viewModels()

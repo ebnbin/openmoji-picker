@@ -46,7 +46,7 @@ dependencies {
         }
         return "$id:$version"
     }
-    api("com.github.ebnbin:eb:0.0.20")
+    api("com.github.ebnbin:eb:0.0.21")
 //    api(project(":eb"))
     api("com.github.ebnbin:eb-material:0.0.7")
 //    api(project(":eb-material"))
