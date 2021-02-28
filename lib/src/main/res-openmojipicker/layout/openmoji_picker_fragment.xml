@@ -45,7 +45,7 @@
         android:layout_margin="16dp"
         android:text="选择图标"
         android:textColor="?attr/colorOnPrimary"
-        app:icon="@drawable/openmoji_picker_check"
+        app:icon="@drawable/eb_material_check"
         app:iconTint="?attr/colorOnPrimary"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

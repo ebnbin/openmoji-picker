@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="23dp">
+        <color android:color="?android:attr/colorBackground"/>
+    </item>
+    <item
+        android:top="23dp"
+        android:bottom="23dp">
+        <color android:color="?attr/colorControlNormal"/>
+    </item>
+</layer-list>

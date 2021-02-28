@@ -5,11 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import dev.ebnbin.eb.notNull
 
 internal class OpenMojiPickerSpinnerAdapter(
     context: Context,
-    objects: List<OpenMojiGroup>,
-) : ArrayAdapter<OpenMojiGroup>(
+    objects: List<OpenMojiPickerItem>,
+) : ArrayAdapter<OpenMojiPickerItem>(
     context,
     R.layout.openmoji_picker_spinner_item,
     android.R.id.text1,
@@ -20,8 +21,8 @@ internal class OpenMojiPickerSpinnerAdapter(
         val item = getItem(position)
         requireNotNull(item)
         val textView = view.findViewById<TextView>(android.R.id.text1)
-        textView.text = item.group
-        view.findViewById<TextView>(R.id.openmoji_picker_count).text = "${item.openMojiCount}"
+        textView.text = item.group.notNull().openMojiGroup.group
+        view.findViewById<TextView>(R.id.openmoji_picker_count).text = "${item.group.notNull().openMojiGroup.openMojiCount}"
         return view
     }
 
@@ -30,8 +31,8 @@ internal class OpenMojiPickerSpinnerAdapter(
         val item = getItem(position)
         requireNotNull(item)
         val textView = view.findViewById<TextView>(android.R.id.text1)
-        textView.text = item.group
-        view.findViewById<TextView>(R.id.openmoji_picker_count).text = "${item.openMojiCount}"
+        textView.text = item.group.notNull().openMojiGroup.group
+        view.findViewById<TextView>(R.id.openmoji_picker_count).text = "${item.group.notNull().openMojiGroup.openMojiCount}"
         return view
     }
 }

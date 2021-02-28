@@ -44,29 +44,45 @@ internal class OpenMojiPickerViewModel : ViewModel() {
 
     val openMojiPickerItemList: List<OpenMojiPickerItem> by lazy {
         val list = mutableListOf<OpenMojiPickerItem>()
-        openMojiMap.forEach { (_, openMojiSubgroupMap) ->
+        var index = 0
+        openMojiMap.forEach { (openMojiGroup, openMojiSubgroupMap) ->
+            list.add(
+                OpenMojiPickerItem(
+                    viewType = OpenMojiPickerItem.ViewType.GROUP,
+                    group = OpenMojiPickerItem.Group(
+                        openMojiGroup,
+                        indexRange = index..(index + openMojiGroup.subgroupCount + openMojiGroup.openMojiCount)
+                    ),
+                ),
+            )
+            ++index
             openMojiSubgroupMap.forEach { (openMojiSubgroup, openMojiList) ->
                 list.add(
                     OpenMojiPickerItem(
-                        viewType = OpenMojiPickerItem.ViewType.GROUP,
-                        group = openMojiSubgroup,
+                        viewType = OpenMojiPickerItem.ViewType.SUBGROUP,
+                        subgroup = OpenMojiPickerItem.Subgroup(
+                            openMojiSubgroup,
+                            indexRange = index..(index + openMojiSubgroup.openMojiCount)
+                        ),
                     ),
                 )
+                ++index
                 openMojiList.forEach { openMoji ->
                     list.add(
                         OpenMojiPickerItem(
-                            viewType = OpenMojiPickerItem.ViewType.EMOJI,
+                            viewType = OpenMojiPickerItem.ViewType.OPENMOJI,
                             openMoji = openMoji
                         ),
                     )
+                    ++index
                 }
             }
         }
         list
     }
 
-    val openMojiGroupList: List<OpenMojiGroup> by lazy {
-        openMojiMap.keys.toList()
+    val openMojiGroupList: List<OpenMojiPickerItem> by lazy {
+        openMojiPickerItemList.filter { it.viewType == OpenMojiPickerItem.ViewType.GROUP }
     }
 
     val selectedPosition: MutableLiveData<Int?> = MutableLiveData(null)

@@ -42,6 +42,7 @@ open class SpanSizeGridLayoutManager(
             val scrollPosition = viewModel.scrollPosition.value.notNull()
             val scrollOffset = viewModel.scrollOffset.value.notNull()
             scrollToPositionWithOffset(scrollPosition, scrollOffset)
+            listener?.onLayoutFinish()
         }
     }
 
@@ -49,5 +50,11 @@ open class SpanSizeGridLayoutManager(
         requireNotNull(view)
         view.removeOnScrollListener(onScrollListener)
         super.onDetachedFromWindow(view, recycler)
+    }
+
+    var listener: Listener? = null
+
+    interface Listener {
+        fun onLayoutFinish()
     }
 }

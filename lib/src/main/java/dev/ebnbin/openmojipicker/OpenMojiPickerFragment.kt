@@ -8,8 +8,9 @@ import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import dev.ebnbin.eb.notNull
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
-import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemEmojiBinding
+import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 
 class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener, AdapterView.OnItemSelectedListener {
     private val viewModel: OpenMojiPickerViewModel by viewModels()
@@ -27,14 +28,29 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener, Adapt
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             if (dy == 0) return
-            val selectedPosition = viewModel.selectedPosition.value ?: return
-            if (selectedPosition < layoutManager.findFirstCompletelyVisibleItemPosition() ||
-                selectedPosition > layoutManager.findLastCompletelyVisibleItemPosition()) {
-                viewModel.selectedPosition.value = null
-                adapter.notifyItemChanged(selectedPosition)
+            val selectedPosition = viewModel.selectedPosition.value
+            if (selectedPosition != null) {
+                if (selectedPosition < layoutManager.findFirstCompletelyVisibleItemPosition() ||
+                    selectedPosition > layoutManager.findLastCompletelyVisibleItemPosition()
+                ) {
+                    viewModel.selectedPosition.value = null
+                    adapter.notifyItemChanged(selectedPosition)
+                }
+            }
+            val spinnerItem = viewModel.openMojiGroupList.firstOrNull {
+                layoutManager.findFirstVisibleItemPosition() in it.group.notNull().indexRange
+            }
+            if (spinnerItem != null) {
+                val index = viewModel.openMojiGroupList.indexOf(spinnerItem)
+                if (index != -1 && index != binding.openmojiPickerSpinner.selectedItemPosition) {
+                    byScroll = true
+                    binding.openmojiPickerSpinner.setSelection(index)
+                }
             }
         }
     }
+
+    private var byScroll: Boolean = false
 
     private lateinit var layoutManager: OpenMojiPickerLayoutManager
 
@@ -45,6 +61,11 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener, Adapt
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         layoutManager = OpenMojiPickerLayoutManager(requireContext(), spanSizeGridLayoutManagerViewModel)
+        layoutManager.listener = object : SpanSizeGridLayoutManager.Listener {
+            override fun onLayoutFinish() {
+                binding.openmojiPickerSpinner.onItemSelectedListener = this@OpenMojiPickerFragment
+            }
+        }
         adapter = OpenMojiPickerAdapter(viewModel, this)
         adapter.submitList(viewModel.openMojiPickerItemList)
 
@@ -65,7 +86,6 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener, Adapt
         binding.openmojiPickerSpinner.let {
             spinnerAdapter = OpenMojiPickerSpinnerAdapter(requireContext(), viewModel.openMojiGroupList)
             it.adapter = spinnerAdapter
-            it.onItemSelectedListener = this
         }
 
         if (viewModel.selectedPosition.value == null) {
@@ -80,7 +100,7 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener, Adapt
         super.onDestroyView()
     }
 
-    override fun emojiOnClick(binding: OpenmojiPickerItemEmojiBinding, openMoji: OpenMoji, position: Int) {
+    override fun emojiOnClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int) {
         val selectedPosition = viewModel.selectedPosition.value
         if (selectedPosition == position) {
             viewModel.selectedPosition.value = null
@@ -94,6 +114,12 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener, Adapt
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        if (byScroll) {
+            byScroll = false
+            return
+        }
+        val index = viewModel.openMojiPickerItemList.indexOf(spinnerAdapter.getItem(position))
+        layoutManager.scrollToPositionWithOffset(index, 0)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
