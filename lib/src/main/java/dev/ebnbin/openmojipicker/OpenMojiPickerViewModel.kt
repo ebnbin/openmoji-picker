@@ -8,10 +8,10 @@ import dev.ebnbin.eb.app
 
 internal class OpenMojiPickerViewModel : ViewModel() {
     private val openMojiList: List<OpenMoji> by lazy {
-        Gson().fromJson(
+        Gson().fromJson<List<OpenMoji>>(
             app.resources.openRawResource(R.raw.openmoji).bufferedReader(),
             object : TypeToken<List<OpenMoji>>() {}.type,
-        )
+        ).filter { it.skintone.isEmpty() }
     }
 
     private val openMojiMap: Map<OpenMojiGroup, Map<OpenMojiSubgroup, List<OpenMoji>>> by lazy {
