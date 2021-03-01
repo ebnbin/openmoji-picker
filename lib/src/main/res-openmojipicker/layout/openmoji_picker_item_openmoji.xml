@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/openmoji_picker_item_emoji">
+    android:background="@drawable/openmoji_picker_item_openmoji">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/openmoji_picker_emoji"
