@@ -12,13 +12,55 @@ import kotlinx.coroutines.withContext
 internal class OpenMojiPickerViewModel : ViewModel() {
     private val openMojiList: MutableLiveData<List<OpenMoji>> = MutableLiveData(emptyList())
 
-    fun init() {
+    fun filter(text: String = "") {
         viewModelScope.launch {
             openMojiList.value = withContext(Dispatchers.IO) {
                 Gson().fromJson<List<OpenMoji>>(
                     app.resources.openRawResource(R.raw.openmoji).bufferedReader(),
                     object : TypeToken<List<OpenMoji>>() {}.type,
-                ).filter { it.skintone.isEmpty() }
+                )
+                    .filter {
+                        it.skintone.isEmpty() // 各种皮肤, 1490
+                    }
+                    .filterNot {
+                        it.group == "component" && it.subgroups == "skin-tone" // 皮肤, 5
+                    }
+                    .filterNot {
+                        it.group == "people-body" && it.subgroups == "person" &&
+                                (it.hexcode.contains("1f9b0", ignoreCase = true) ||
+                                        it.hexcode.contains("1f9b1", ignoreCase = true) ||
+                                        it.hexcode.contains("1f9b2", ignoreCase = true) ||
+                                        it.hexcode.contains("1f9b3", ignoreCase = true)) // 各种发型, 3*4=12
+                    }
+                    .filterNot {
+                        it.group == "component" && it.subgroups == "hair-style" // 发型, 4
+                    }
+                    .filterNot {
+                        it.group == "people-body" && it.subgroups == "person" && it.hexcode.contains("1f471", ignoreCase = true) // 金发, 3
+                    }
+                    .filterNot {
+                        it.hexcode.contains("200d-2640-fe0f", ignoreCase = true) || // 女性, 10+7+9+9+13+1+2=51
+                                it.hexcode.contains("200d-2642-fe0f", ignoreCase = true) // 男性, 10+7+9+9+13+1+2=51
+                    }
+                    .filterNot {
+                        it.hexcode.contains("1f468-200d", ignoreCase = true) || // 男性, 17+3+17=37
+                                it.hexcode.contains("1f469-200d", ignoreCase = true) // 女性, 17+3+19=39, 重复 5, 男女共 71
+                    }
+                    .filterNot { it.group == "flags" && (it.subgroups == "country-flag" || it.subgroups == "subdivision-flag") } // 258+3=261
+//                    .filterNot { it.group == "extras-openmoji" || it.group == "extras-unicode" } // extra, 313+57=370
+                    .filter {
+                        if (text.isEmpty()) {
+                            true
+                        } else {
+                            it.emoji == text ||
+                                    it.hexcode.contains(text, ignoreCase = true) ||
+                                    it.group.contains(text, ignoreCase = true) ||
+                                    it.subgroups.contains(text, ignoreCase = true) ||
+                                    it.annotation.contains(text, ignoreCase = true) ||
+                                    it.tags.contains(text, ignoreCase = true) ||
+                                    it.openmoji_tags.contains(text, ignoreCase = true)
+                        }
+                    }
             }
         }
     }

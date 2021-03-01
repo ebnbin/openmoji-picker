@@ -38,6 +38,30 @@
         android:scrollbarStyle="outsideOverlay"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:background="?attr/colorBackgroundFloating"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <EditText
+            android:id="@+id/openmoji_picker_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Filter"
+            android:inputType="text"/>
+
+        <TextView
+            android:id="@+id/openmoji_picker_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/openmoji_picker_extended_floating_action_button"
         android:layout_width="wrap_content"

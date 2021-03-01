@@ -25,7 +25,7 @@ internal class OpenMojiPickerSpinnerAdapter(
         textView.text = item.group.notNull().openMojiGroup.group
         textView.compoundDrawablePadding = 8f.dpToPxRound
         textView.setCompoundDrawablesRelativeWithIntrinsicBounds(item.group.notNull().openMojiGroup.openMoji.iconDrawableId, 0, 0, 0)
-        view.findViewById<TextView>(R.id.openmoji_picker_count).text = "${item.group.notNull().openMojiGroup.openMojiCount}"
+        view.findViewById<TextView>(R.id.openmoji_picker_count).text = "${item.group.notNull().openMojiGroup.subgroupCount}#${item.group.notNull().openMojiGroup.openMojiCount}"
         return view
     }
 
@@ -37,7 +37,7 @@ internal class OpenMojiPickerSpinnerAdapter(
         textView.text = item.group.notNull().openMojiGroup.group
         textView.compoundDrawablePadding = 8f.dpToPxRound
         textView.setCompoundDrawablesRelativeWithIntrinsicBounds(item.group.notNull().openMojiGroup.openMoji.iconDrawableId, 0, 0, 0)
-        view.findViewById<TextView>(R.id.openmoji_picker_count).text = "${item.group.notNull().openMojiGroup.openMojiCount}"
+        view.findViewById<TextView>(R.id.openmoji_picker_count).text = "${item.group.notNull().openMojiGroup.subgroupCount}#${item.group.notNull().openMojiGroup.openMojiCount}"
         return view
     }
 }

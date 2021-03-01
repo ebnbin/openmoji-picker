@@ -1,21 +1,24 @@
 package dev.ebnbin.openmojipicker
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.core.view.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import dev.ebnbin.eb.notNull
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 
 internal class OpenMojiPickerFragment : Fragment(),
     OpenMojiPickerAdapter.Listener,
-    AdapterView.OnItemSelectedListener {
+    AdapterView.OnItemSelectedListener,
+    TextWatcher {
     private val viewModel: OpenMojiPickerViewModel by viewModels()
 
     private val spanSizeGridLayoutManagerViewModel: SpanSizeGridLayoutManagerViewModel by viewModels()
@@ -72,6 +75,10 @@ internal class OpenMojiPickerFragment : Fragment(),
         adapter = OpenMojiPickerAdapter(viewModel, this)
         viewModel.openMojiPickerItemList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            binding.openmojiPickerCount.text = it
+                .filter { openMojiPickerItem -> openMojiPickerItem.viewType == OpenMojiPickerItem.ViewType.OPENMOJI }
+                .size.toString()
+
         }
 
         viewModel.selectedPosition.observe(viewLifecycleOwner) {
@@ -98,6 +105,7 @@ internal class OpenMojiPickerFragment : Fragment(),
                 true
             }
         }
+        binding.openmojiPickerFilter.addTextChangedListener(this)
 
         if (viewModel.selectedPosition.value == null) {
             binding.openmojiPickerExtendedFloatingActionButton.hide()
@@ -105,10 +113,11 @@ internal class OpenMojiPickerFragment : Fragment(),
             binding.openmojiPickerExtendedFloatingActionButton.show()
         }
 
-        viewModel.init()
+        viewModel.filter()
     }
 
     override fun onDestroyView() {
+        binding.openmojiPickerFilter.removeTextChangedListener(this)
         binding.openmojiPickerRecyclerView.removeOnScrollListener(onScrollListener)
         super.onDestroyView()
     }
@@ -131,9 +140,7 @@ internal class OpenMojiPickerFragment : Fragment(),
         openMoji: OpenMoji,
         position: Int
     ): Boolean {
-        Snackbar.make(this.binding.openmojiPickerCoordinatorLayout,
-            "${openMoji.emoji},${openMoji.hexcode}\n${openMoji.annotation}", Snackbar.LENGTH_INDEFINITE).show()
-        return true
+        return false
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -146,5 +153,28 @@ internal class OpenMojiPickerFragment : Fragment(),
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+    }
+
+    private var filterRunnable: Runnable? = null
+
+    override fun afterTextChanged(s: Editable?) {
+        filterRunnable?.let {
+            filterRunnable = null
+            binding.openmojiPickerFilter.removeCallbacks(it)
+        }
+        Runnable {
+            viewModel.filter(s.toString())
+        }.let {
+            binding.openmojiPickerFilter.postDelayed(1000L) {
+                it.run()
+            }
+            filterRunnable = it
+        }
     }
 }
