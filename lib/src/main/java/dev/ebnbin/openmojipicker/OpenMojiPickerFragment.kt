@@ -99,12 +99,6 @@ internal class OpenMojiPickerFragment : Fragment(),
             spinnerAdapter = OpenMojiPickerSpinnerAdapter(requireContext(), it)
             binding.openmojiPickerSpinner.adapter = spinnerAdapter
         }
-        binding.openmojiPickerToolbar.let {
-            it.inflateMenu(R.menu.openmoji_picker_fragment_toolbar)
-            it.menu.findItem(R.id.openmoji_picker_filter).setOnMenuItemClickListener {
-                true
-            }
-        }
         binding.openmojiPickerFilter.addTextChangedListener(this)
 
         if (viewModel.selectedPosition.value == null) {
