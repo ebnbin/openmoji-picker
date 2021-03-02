@@ -1,5 +1,11 @@
 buildscript {
-    apply("https://raw.githubusercontent.com/ebnbin/gradle-extra/0.0.8/extra.gradle.kts")
+    apply(
+        if (rootProject.extra.has("devExtra")) {
+            "https://raw.githubusercontent.com/ebnbin/gradle-extra/${rootProject.extra["devExtra"]}/extra.gradle.kts"
+        } else {
+            "../gradle-extra/extra.gradle.kts"
+        }
+    )
     repositories {
         google()
         jcenter()

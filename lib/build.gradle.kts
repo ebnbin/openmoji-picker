@@ -46,18 +46,20 @@ dependencies {
         }
         return "$id:$version"
     }
-    api("com.github.ebnbin:eb:0.0.21")
-//    api(project(":eb"))
-    api("com.github.ebnbin:eb-material:0.0.7")
-//    api(project(":eb-material"))
-    implementation(dependency("androidx.annotation:annotation"))
-    implementation(dependency("androidx.lifecycle:lifecycle-viewmodel-ktx"))
-    implementation(dependency("androidx.lifecycle:lifecycle-livedata-ktx"))
-    implementation(dependency("androidx.activity:activity-ktx"))
-    implementation(dependency("androidx.fragment:fragment-ktx"))
+
+    fun devDependency(id: String): Any {
+        return if (rootProject.extra.has("devLib.$id")) {
+            "com.github.ebnbin:$id:${rootProject.extra["devLib.$id"]}"
+        } else {
+            project(":$id")
+        }
+    }
+
+    api(devDependency("eb"))
+    api(devDependency("eb-material"))
+
     implementation(dependency("androidx.coordinatorlayout:coordinatorlayout"))
     implementation(dependency("androidx.constraintlayout:constraintlayout"))
-    implementation(dependency("androidx.recyclerview:recyclerview"))
     implementation(dependency("com.google.code.gson:gson"))
     implementation(dependency("com.github.bumptech.glide:glide"))
 }
