@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
-import dev.ebnbin.eb.BindingViewHolder
 import dev.ebnbin.eb.layoutInflater
 import dev.ebnbin.eb.notNull
+import dev.ebnbin.ebui.BindingViewHolder
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemGroupBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemSubgroupBinding
