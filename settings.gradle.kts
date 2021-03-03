@@ -8,4 +8,4 @@ fun devInclude(id: String) {
 }
 
 devInclude("eb")
-devInclude("eb-material")
+devInclude("ebui")

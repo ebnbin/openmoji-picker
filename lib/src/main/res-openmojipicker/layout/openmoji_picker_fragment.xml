@@ -15,7 +15,7 @@
             android:id="@+id/openmoji_picker_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/eb_material_arrow_back"
+            app:navigationIcon="@drawable/ebui_material_arrow_back"
             app:navigationIconTint="?attr/colorControlNormal">
 
             <androidx.appcompat.widget.AppCompatSpinner
@@ -70,7 +70,7 @@
         android:layout_margin="16dp"
         android:text="选择图标"
         android:textColor="?attr/colorOnPrimary"
-        app:icon="@drawable/eb_material_check"
+        app:icon="@drawable/ebui_material_check"
         app:iconTint="?attr/colorOnPrimary"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -56,7 +56,7 @@ dependencies {
     }
 
     api(devDependency("eb"))
-    api(devDependency("eb-material"))
+    api(devDependency("ebui"))
 
     implementation(dependency("androidx.coordinatorlayout:coordinatorlayout"))
     implementation(dependency("androidx.constraintlayout:constraintlayout"))
