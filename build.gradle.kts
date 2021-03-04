@@ -1,9 +1,10 @@
 buildscript {
     apply(
-        if (rootProject.extra.has("devExtra")) {
-            "https://raw.githubusercontent.com/ebnbin/gradle-extra/${rootProject.extra["devExtra"]}/extra.gradle.kts"
+        if (rootProject.extra.has("dev.gradle-build")) {
+            val version = rootProject.extra["dev.gradle-build"]
+            "https://raw.githubusercontent.com/ebnbin/gradle-build/$version/extra.gradle.kts"
         } else {
-            "../gradle-extra/extra.gradle.kts"
+            "../gradle-build/extra.gradle.kts"
         }
     )
     repositories {

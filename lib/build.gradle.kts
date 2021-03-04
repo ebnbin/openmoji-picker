@@ -48,8 +48,8 @@ dependencies {
     }
 
     fun devDependency(id: String): Any {
-        return if (rootProject.extra.has("devLib.$id")) {
-            "com.github.ebnbin:$id:${rootProject.extra["devLib.$id"]}"
+        return if (rootProject.extra.has("dev.$id")) {
+            "com.github.ebnbin:$id:${rootProject.extra["dev.$id"]}"
         } else {
             project(":$id")
         }
