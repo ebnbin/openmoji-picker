@@ -2,6 +2,7 @@
 /.gradle/
 /.idea/
 /build/
+/java/build/
 /lib/build/
 /local.properties
 gitignore/

@@ -9,3 +9,5 @@ fun devInclude(id: String) {
 
 devInclude("eb")
 devInclude("ebui")
+
+include(":java")
