@@ -11,9 +11,7 @@ import androidx.core.view.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.GsonBuilder
 import dev.ebnbin.eb.notNull
-import dev.ebnbin.ebui.openLogDialog
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 
@@ -136,10 +134,6 @@ internal class OpenMojiPickerFragment : Fragment(),
         openMoji: OpenMoji,
         position: Int
     ): Boolean {
-        childFragmentManager.openLogDialog(
-            title = openMoji.hexcode,
-            log = GsonBuilder().setPrettyPrinting().create().toJson(openMoji),
-        )
         return false
     }
 

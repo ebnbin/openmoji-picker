@@ -11,7 +11,7 @@ internal class OpenMojiPickerLayoutManager(
 ) : SpanSizeGridLayoutManager(
     context,
     viewModel,
-    spanSize = 48f,
+    spanSize = 56f,
 ) {
     override fun onAttachedToWindow(view: RecyclerView?) {
         super.onAttachedToWindow(view)
@@ -21,7 +21,6 @@ internal class OpenMojiPickerLayoutManager(
                 val adapter = view.adapter.notNull()
                 return when (OpenMojiPickerItem.ViewType.of(adapter.getItemViewType(position))) {
                     OpenMojiPickerItem.ViewType.GROUP -> spanCount
-                    OpenMojiPickerItem.ViewType.SUBGROUP -> 0
                     OpenMojiPickerItem.ViewType.OPENMOJI -> 1
                 }
             }

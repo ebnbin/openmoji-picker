@@ -36,70 +36,45 @@ internal class OpenMojiPickerViewModel : ViewModel() {
         }
     }
 
-    private val openMojiMap: LiveData<Map<OpenMojiGroup, Map<OpenMojiSubgroup, List<OpenMoji>>>> = Transformations.map(openMojiList) {
-        val map = linkedMapOf<String, LinkedHashMap<String, MutableList<OpenMoji>>>()
+    private val openMojiMap: LiveData<Map<OpenMojiGroup, List<OpenMoji>>> = Transformations.map(openMojiList) {
+        val map = linkedMapOf<String, MutableList<OpenMoji>>()
         openMojiList.value.notNull().forEach {
-            map[it.group] = (map[it.group] ?: linkedMapOf()).also { subgroupMap ->
-                subgroupMap[it.subgroups] = (subgroupMap[it.subgroups] ?: mutableListOf()).also { openMojiList ->
-                    openMojiList.add(it)
-                }
+            map[it.group] = (map[it.group] ?: mutableListOf()).also { openMojiList ->
+                openMojiList.add(it)
             }
         }
         map
             .mapKeys { groupEntry ->
                 OpenMojiGroup(
                     group = groupEntry.key,
-                    subgroupCount = groupEntry.value.size,
-                    openMojiCount = groupEntry.value.asSequence().fold(0) { acc, entry -> acc + entry.value.size },
-                    openMoji = groupEntry.value.values.first().first(),
+                    openMojiCount = groupEntry.value.size,
+                    openMoji = groupEntry.value.first(),
                 )
-            }
-            .mapValues { groupEntry ->
-                groupEntry.value.mapKeys { subgroupEntry ->
-                    OpenMojiSubgroup(
-                        group = groupEntry.key.group,
-                        subgroup = subgroupEntry.key,
-                        openMojiCount = subgroupEntry.value.size,
-                        openMoji = subgroupEntry.value.first(),
-                    )
-                }
             }
     }
 
     val openMojiPickerItemList: LiveData<List<OpenMojiPickerItem>> = Transformations.map(openMojiMap) {
         val list = mutableListOf<OpenMojiPickerItem>()
         var index = 0
-        openMojiMap.value.notNull().forEach { (openMojiGroup, openMojiSubgroupMap) ->
+        openMojiMap.value.notNull().forEach { (openMojiGroup, openMojiList) ->
             list.add(
                 OpenMojiPickerItem(
                     viewType = OpenMojiPickerItem.ViewType.GROUP,
                     group = OpenMojiPickerItem.Group(
                         openMojiGroup,
-                        indexRange = index..(index + openMojiGroup.subgroupCount + openMojiGroup.openMojiCount)
+                        indexRange = index..(index + openMojiGroup.openMojiCount)
                     ),
                 ),
             )
             ++index
-            openMojiSubgroupMap.forEach { (openMojiSubgroup, openMojiList) ->
-//                list.add(
-//                    OpenMojiPickerItem(
-//                        viewType = OpenMojiPickerItem.ViewType.SUBGROUP,
-//                        subgroup = OpenMojiPickerItem.Subgroup(
-//                            openMojiSubgroup,
-//                            indexRange = index..(index + openMojiSubgroup.openMojiCount)
-//                        ),
-//                    ),
-//                )
-//                ++index
-                openMojiList.forEach { openMoji ->
-                    list.add(
-                        OpenMojiPickerItem(
-                            viewType = OpenMojiPickerItem.ViewType.OPENMOJI,
-                            openMoji = openMoji
-                        ),
-                    )
-                    ++index
-                }
+            openMojiList.forEach { openMoji ->
+                list.add(
+                    OpenMojiPickerItem(
+                        viewType = OpenMojiPickerItem.ViewType.OPENMOJI,
+                        openMoji = openMoji
+                    ),
+                )
+                ++index
             }
         }
         list

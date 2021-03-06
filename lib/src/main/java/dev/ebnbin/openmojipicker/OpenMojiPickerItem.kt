@@ -3,7 +3,6 @@ package dev.ebnbin.openmojipicker
 internal data class OpenMojiPickerItem(
     val viewType: ViewType,
     val group: Group? = null,
-    val subgroup: Subgroup? = null,
     val openMoji: OpenMoji? = null,
 ) {
     data class Group(
@@ -11,14 +10,8 @@ internal data class OpenMojiPickerItem(
         val indexRange: IntRange,
     )
 
-    data class Subgroup(
-        val openMojiSubgroup: OpenMojiSubgroup,
-        val indexRange: IntRange,
-    )
-
     enum class ViewType {
         GROUP,
-        SUBGROUP,
         OPENMOJI;
 
         companion object {
