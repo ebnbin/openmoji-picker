@@ -27,6 +27,17 @@ data class OpenMoji(
         }
 
     @IgnoredOnParcel
+    private var drawable48IdCache: Int? = null
+
+    val drawable48Id: Int
+        get() = drawable48IdCache ?: kotlin.runCatching {
+            val name = "openmoji_48_${hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}"
+            R.drawable::class.java.getField(name).getInt(null)
+        }.getOrDefault(0).also {
+            drawable48IdCache = it
+        }
+
+    @IgnoredOnParcel
     private var iconDrawableIdCache: Int? = null
 
     val iconDrawableId: Int

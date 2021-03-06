@@ -29,8 +29,8 @@ internal class OpenMojiPickerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<ViewBinding> {
         val layoutInflater = parent.context.layoutInflater
         val binding = when (OpenMojiPickerItem.ViewType.of(viewType)) {
-            OpenMojiPickerItem.ViewType.GROUP -> OpenmojiPickerItemGroupBinding.inflate(layoutInflater, parent, false)
-            OpenMojiPickerItem.ViewType.SUBGROUP -> OpenmojiPickerItemSubgroupBinding.inflate(layoutInflater, parent, false)
+            OpenMojiPickerItem.ViewType.GROUP -> OpenmojiPickerItemSubgroupBinding.inflate(layoutInflater, parent, false)
+            OpenMojiPickerItem.ViewType.SUBGROUP -> OpenmojiPickerItemGroupBinding.inflate(layoutInflater, parent, false)
             OpenMojiPickerItem.ViewType.OPENMOJI -> OpenmojiPickerItemOpenmojiBinding.inflate(layoutInflater, parent, false)
         }
         return BindingViewHolder(binding)
@@ -38,17 +38,18 @@ internal class OpenMojiPickerAdapter(
 
     override fun onBindViewHolder(holder: BindingViewHolder<ViewBinding>, position: Int) {
         when (OpenMojiPickerItem.ViewType.of(getItemViewType(position))) {
-            OpenMojiPickerItem.ViewType.GROUP -> Unit
-            OpenMojiPickerItem.ViewType.SUBGROUP -> {
+            OpenMojiPickerItem.ViewType.GROUP -> {
                 val binding = holder.binding as OpenmojiPickerItemSubgroupBinding
-                val subgroup = getItem(position).subgroup.notNull()
-                binding.openmojiPickerChip.text = "${subgroup.openMojiSubgroup.group}#${subgroup.openMojiSubgroup.subgroup} (${subgroup.openMojiSubgroup.openMojiCount})"
+                val group = getItem(position).group.notNull()
+                binding.openmojiPickerChip.text = "${group.openMojiGroup.group} (${group.openMojiGroup.openMojiCount})"
+            }
+            OpenMojiPickerItem.ViewType.SUBGROUP -> {
             }
             OpenMojiPickerItem.ViewType.OPENMOJI -> {
                 val binding = holder.binding as OpenmojiPickerItemOpenmojiBinding
                 val openMoji = getItem(position).openMoji.notNull()
                 Glide.with(binding.openmojiPickerEmoji)
-                    .load(openMoji.drawableId)
+                    .load(openMoji.drawable48Id)
                     .into(binding.openmojiPickerEmoji)
                 binding.root.isSelected = position == viewModel.selectedPosition.value
                 binding.openmojiPickerEmoji.setOnClickListener {

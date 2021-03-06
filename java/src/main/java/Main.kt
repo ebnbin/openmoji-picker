@@ -9,6 +9,7 @@ fun main() {
 //    openMoji2List()
 //    deleteDrawable()
 //    drawableDp()
+//    png48()
 }
 
 private fun openMojiList(): List<OpenMoji> {
@@ -146,5 +147,19 @@ private fun drawableDp() {
                 .replace("android:width=\"${from}dp\"", "android:width=\"${to}dp\"")
                 .replace("android:height=\"${from}dp\"", "android:height=\"${to}dp\"")
             it.writeText(text)
+        }
+}
+
+private fun png48() {
+    val openMojiNameList = filter()
+        .map { "${it.hexcode}.png" }
+    File("file/72x72").listFiles()!!
+        .filter { openMojiNameList.contains(it.name) }
+        .forEach {
+            val file = File(
+                "lib/src/main/res-openmoji/drawable-hdpi",
+                "openmoji_48_${it.nameWithoutExtension.toLowerCase(Locale.ROOT).replace("-", "_")}.png",
+            )
+            it.copyTo(file)
         }
 }

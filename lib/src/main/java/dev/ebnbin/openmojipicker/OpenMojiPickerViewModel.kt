@@ -19,7 +19,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
                     app.resources.openRawResource(R.raw.openmoji).bufferedReader(),
                     object : TypeToken<List<OpenMoji>>() {}.type,
                 )
-                    .filterNot { it.group == "flags" && (it.subgroups == "country-flag" || it.subgroups == "subdivision-flag") } // flags
+//                    .filterNot { it.group == "flags" && (it.subgroups == "country-flag" || it.subgroups == "subdivision-flag") } // flags
                     .filterNot { it.group == "extras-openmoji" || it.group == "extras-unicode" } // extras
                     .filter {
                         if (text.isEmpty()) {
@@ -81,16 +81,16 @@ internal class OpenMojiPickerViewModel : ViewModel() {
             )
             ++index
             openMojiSubgroupMap.forEach { (openMojiSubgroup, openMojiList) ->
-                list.add(
-                    OpenMojiPickerItem(
-                        viewType = OpenMojiPickerItem.ViewType.SUBGROUP,
-                        subgroup = OpenMojiPickerItem.Subgroup(
-                            openMojiSubgroup,
-                            indexRange = index..(index + openMojiSubgroup.openMojiCount)
-                        ),
-                    ),
-                )
-                ++index
+//                list.add(
+//                    OpenMojiPickerItem(
+//                        viewType = OpenMojiPickerItem.ViewType.SUBGROUP,
+//                        subgroup = OpenMojiPickerItem.Subgroup(
+//                            openMojiSubgroup,
+//                            indexRange = index..(index + openMojiSubgroup.openMojiCount)
+//                        ),
+//                    ),
+//                )
+//                ++index
                 openMojiList.forEach { openMoji ->
                     list.add(
                         OpenMojiPickerItem(
