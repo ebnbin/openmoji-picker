@@ -19,8 +19,8 @@ internal class OpenMojiPickerViewModel : ViewModel() {
                     app.resources.openRawResource(R.raw.openmoji).bufferedReader(),
                     object : TypeToken<List<OpenMoji>>() {}.type,
                 )
-//                    .filterNot { it.group == "flags" && (it.subgroups == "country-flag" || it.subgroups == "subdivision-flag") } // flags
-//                    .filterNot { it.group == "extras-openmoji" || it.group == "extras-unicode" } // extras
+                    .filterNot { it.group == "flags" && (it.subgroups == "country-flag" || it.subgroups == "subdivision-flag") } // flags
+                    .filterNot { it.group == "extras-openmoji" || it.group == "extras-unicode" } // extras
                     .filter {
                         if (text.isEmpty()) {
                             true
