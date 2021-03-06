@@ -6,28 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/openmoji_picker_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ebui_material_arrow_back"
-            app:navigationIconTint="?attr/colorControlNormal">
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/openmoji_picker_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="?attr/colorControlNormal"/>
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/openmoji_picker_recycler_view"
         android:layout_width="match_parent"
@@ -38,32 +16,15 @@
         android:scrollbarStyle="outsideOverlay"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
-    <LinearLayout
-        android:layout_width="200dp"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/openmoji_picker_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom"
-        android:background="?attr/colorBackgroundFloating"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp">
-
-        <EditText
-            android:id="@+id/openmoji_picker_filter"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Filter"
-            android:inputType="text"/>
-
-        <TextView
-            android:id="@+id/openmoji_picker_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
+        app:navigationIcon="@drawable/ebui_material_arrow_back"
+        app:navigationIconTint="?attr/colorControlNormal"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/openmoji_picker_extended_floating_action_button"
+        android:id="@+id/openmoji_picker_pick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
