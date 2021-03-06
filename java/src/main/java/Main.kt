@@ -1,11 +1,13 @@
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.io.File
+import java.util.Locale
 
 fun main() {
 //    json()
 //    filter()
 //    openMoji2List()
+//    deleteDrawable()
 }
 
 private fun openMojiList(): List<OpenMoji> {
@@ -120,4 +122,15 @@ private fun openMoji2List() {
         )
     }
     File("file", "openmoji2.json").writeText(GsonBuilder().setPrettyPrinting().create().toJson(openMoji2List))
+}
+
+private fun deleteDrawable() {
+    val openMojiNameList = filter()
+        .map { "openmoji_${it.hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}.xml" }
+    File("lib/src/main/res-openmoji/drawable").listFiles()!!
+        .filter { it.name.startsWith("openmoji_") && !it.name.startsWith("openmoji_icon_") }
+        .filterNot { openMojiNameList.contains(it.name) }
+        .forEach {
+            it.delete()
+        }
 }
