@@ -9,6 +9,7 @@ fun main() {
 //    openMoji2List()
 //    deleteDrawable()
 //    drawableDp()
+//    rename48()
 //    png48()
 }
 
@@ -139,7 +140,7 @@ private fun deleteDrawable() {
 
 private fun drawableDp() {
     val from = 72
-    val to = 72
+    val to = 48
     File("lib/src/main/res-openmoji/drawable").listFiles()!!
         .filter { it.name.startsWith("openmoji_") && !it.name.startsWith("openmoji_icon_") }
         .forEach {
@@ -147,6 +148,19 @@ private fun drawableDp() {
                 .replace("android:width=\"${from}dp\"", "android:width=\"${to}dp\"")
                 .replace("android:height=\"${from}dp\"", "android:height=\"${to}dp\"")
             it.writeText(text)
+        }
+}
+
+private fun rename48() {
+    File("lib/src/main/res-openmoji/drawable").listFiles()!!
+        .filter { it.name.startsWith("openmoji_") && !it.name.startsWith("openmoji_icon_") }
+        .forEach {
+            it.renameTo(
+                File(
+                    it.parent,
+                    "openmoji_48_${it.nameWithoutExtension.substring(9)}.xml",
+                )
+            )
         }
 }
 

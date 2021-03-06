@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="72.0"
+    android:viewportHeight="72.0">
+    <path
+        android:pathData="M36,60A24,24 0,0 0,54.16 20.3q-0.13,-0.15 -0.26,-0.3A24,24 0,1 0,36 60Z"
+        android:fillColor="#fcea2b"/>
+    <path
+        android:pathData="M45.81,45.23a15.43,15.43 0,0 1,-19.63 0"
+        android:strokeLineCap="round"
+        android:strokeColor="#000"
+        android:fillColor="#00000000"
+        android:strokeWidth="2"
+        android:strokeLineJoin="round"/>
+    <path
+        android:pathData="M47.77,16.23a23.03,23.03 0,0 0,-23.37 -0.1"
+        android:strokeLineCap="round"
+        android:strokeColor="#000"
+        android:fillColor="#00000000"
+        android:strokeWidth="2"
+        android:strokeLineJoin="round"/>
+    <path
+        android:pathData="M17.64,22.15a23,23 0,1 0,36.63 -0.13"
+        android:strokeLineCap="round"
+        android:strokeColor="#000"
+        android:fillColor="#00000000"
+        android:strokeWidth="2"
+        android:strokeLineJoin="round"/>
+    <path
+        android:pathData="M11,14.8a25,5.25 0,1 0,50 0a25,5.25 0,1 0,-50 0z"
+        android:strokeColor="#000"
+        android:fillColor="#00000000"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M31.69,33.4a4.73,4.73 0,0 0,-8.64 0"
+        android:strokeLineCap="round"
+        android:strokeColor="#000"
+        android:fillColor="#00000000"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M48.94,33.4a4.73,4.73 0,0 0,-8.64 0"
+        android:strokeLineCap="round"
+        android:strokeColor="#000"
+        android:fillColor="#00000000"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M11,14.8a25,5.25 0,1 0,50 0a25,5.25 0,1 0,-50 0z"
+        android:strokeColor="#61b2e4"
+        android:fillColor="#00000000"
+        android:strokeWidth="2.1"/>
+</vector>
