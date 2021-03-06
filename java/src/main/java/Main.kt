@@ -8,6 +8,7 @@ fun main() {
 //    filter()
 //    openMoji2List()
 //    deleteDrawable()
+//    drawableDp()
 }
 
 private fun openMojiList(): List<OpenMoji> {
@@ -132,5 +133,18 @@ private fun deleteDrawable() {
         .filterNot { openMojiNameList.contains(it.name) }
         .forEach {
             it.delete()
+        }
+}
+
+private fun drawableDp() {
+    val from = 72
+    val to = 72
+    File("lib/src/main/res-openmoji/drawable").listFiles()!!
+        .filter { it.name.startsWith("openmoji_") && !it.name.startsWith("openmoji_icon_") }
+        .forEach {
+            val text = it.readText()
+                .replace("android:width=\"${from}dp\"", "android:width=\"${to}dp\"")
+                .replace("android:height=\"${from}dp\"", "android:height=\"${to}dp\"")
+            it.writeText(text)
         }
 }

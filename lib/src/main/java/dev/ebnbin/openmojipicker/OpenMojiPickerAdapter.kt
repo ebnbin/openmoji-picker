@@ -57,7 +57,6 @@ internal class OpenMojiPickerAdapter(
                 binding.openmojiPickerEmoji.setOnLongClickListener {
                     listener.openMojiOnLongClick(binding, openMoji, position)
                 }
-                binding.openmojiPickerInfo.text = "${openMoji.emoji},${openMoji.hexcode},${openMoji.annotation}"
             }
         }
     }
