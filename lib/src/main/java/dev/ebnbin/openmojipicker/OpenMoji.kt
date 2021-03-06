@@ -14,16 +14,6 @@ data class OpenMoji(
     val group: String,
     val subgroups: String,
     val annotation: String,
-    val tags: String,
-    val openmoji_tags: String,
-    val openmoji_author: String,
-    val openmoji_date: String,
-    val skintone: String,
-    val skintone_combination: String,
-    val skintone_base_emoji: String,
-    val skintone_base_hexcode: String,
-    val unicode: String,
-    val order: String,
 ) : Parcelable {
     @IgnoredOnParcel
     private var drawableIdCache: Int? = null
