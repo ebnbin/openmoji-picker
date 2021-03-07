@@ -25,6 +25,13 @@ class OpenMojiViewModel : ViewModel() {
         }
     }
 
+    fun getOpenMoji(hexcode: String): OpenMoji? {
+        if (hexcode.isEmpty()) {
+            return null
+        }
+        return openMojiList.value.notNull().firstOrNull { it.hexcode == hexcode }
+    }
+
     val openMojiMap: LiveData<Map<OpenMojiGroup, List<OpenMoji>>> = Transformations.map(openMojiList) {
         val map = linkedMapOf<String, MutableList<OpenMoji>>()
         openMojiList.value.notNull().forEach {
