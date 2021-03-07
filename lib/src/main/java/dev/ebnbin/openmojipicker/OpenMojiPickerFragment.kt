@@ -15,7 +15,11 @@ import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 
 internal class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
-    private val viewModel: OpenMojiPickerViewModel by viewModels()
+    private val openMojiViewModel: OpenMojiViewModel by viewModels()
+
+    private val viewModel: OpenMojiPickerViewModel by viewModels {
+        OpenMojiPickerViewModel.Factory(openMojiViewModel)
+    }
 
     private val spanSizeGridLayoutManagerViewModel: SpanSizeGridLayoutManagerViewModel by viewModels()
 
@@ -99,8 +103,6 @@ internal class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listen
         } else {
             binding.openmojiPickerPick.show()
         }
-
-        viewModel.filter()
     }
 
     override fun onDestroyView() {
