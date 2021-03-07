@@ -1,10 +1,10 @@
 buildscript {
     apply(
-        if (rootProject.extra.has("dev.gradle-build")) {
+        if (java.util.Properties().also { it.load(File(rootDir, "local.properties").reader()) }["devEnabled"] == "true") {
+            "../gradle-build/extra.gradle.kts"
+        } else {
             val version = rootProject.extra["dev.gradle-build"]
             "https://raw.githubusercontent.com/ebnbin/gradle-build/$version/extra.gradle.kts"
-        } else {
-            "../gradle-build/extra.gradle.kts"
         }
     )
     repositories {

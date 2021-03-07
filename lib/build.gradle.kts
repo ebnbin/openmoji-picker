@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -48,10 +50,10 @@ dependencies {
     }
 
     fun devDependency(id: String): Any {
-        return if (rootProject.extra.has("dev.$id")) {
-            "com.github.ebnbin:$id:${rootProject.extra["dev.$id"]}"
-        } else {
+        return if (gradleLocalProperties(rootDir)["devEnabled"] == "true") {
             project(":$id")
+        } else {
+            "com.github.ebnbin:$id:${rootProject.extra["dev.$id"]}"
         }
     }
 
