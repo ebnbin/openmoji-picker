@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.ebnbin.eb.notNull
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
+import kotlin.math.min
 
 internal class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
     private val viewModel: OpenMojiPickerViewModel by viewModels()
@@ -53,7 +54,6 @@ internal class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listen
         viewModel.openMojiPickerItemList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
-
         viewModel.selectedPosition.observe(viewLifecycleOwner) {
             if (it == null) {
                 binding.openmojiPickerPick.hide()
@@ -64,7 +64,37 @@ internal class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listen
         }
 
         binding.openmojiPickerToolbar.let {
-            it.setOnClickListener {
+            it.menu.findItem(R.id.openmoji_picker_previous).setOnMenuItemClickListener {
+                val position = layoutManager.findFirstCompletelyVisibleItemPosition()
+                val group = viewModel.openMojiPickerItemList.value.notNull()
+                    .filter { openMojiPickerItem -> openMojiPickerItem.viewType == OpenMojiPickerItem.ViewType.GROUP }
+                    .first { openMojiPickerItem ->
+                        val range = openMojiPickerItem.group.notNull().indexRange
+                        IntRange(range.first, range.last + 1).contains(position)
+                    }
+                val index = viewModel.openMojiPickerItemList.value.notNull().indexOf(group)
+                layoutManager.scrollToPositionWithOffset(index, 0)
+                spanSizeGridLayoutManagerViewModel.scrollPosition.value = index
+                spanSizeGridLayoutManagerViewModel.scrollOffset.value = 0
+                true
+            }
+            it.menu.findItem(R.id.openmoji_picker_next).setOnMenuItemClickListener {
+                val position = layoutManager.findFirstVisibleItemPosition()
+                val groupList = viewModel.openMojiPickerItemList.value.notNull()
+                    .filter { openMojiPickerItem -> openMojiPickerItem.viewType == OpenMojiPickerItem.ViewType.GROUP }
+                val group = groupList
+                    .first { openMojiPickerItem ->
+                        val range = openMojiPickerItem.group.notNull().indexRange
+                        IntRange(range.first, range.last).contains(position)
+                    }
+                val groupIndex = min(groupList.size - 1, groupList.indexOf(group) + 1)
+                val index = viewModel.openMojiPickerItemList.value.notNull().indexOf(groupList[groupIndex])
+                layoutManager.scrollToPositionWithOffset(index, 0)
+                spanSizeGridLayoutManagerViewModel.scrollPosition.value = index
+                spanSizeGridLayoutManagerViewModel.scrollOffset.value = 0
+                true
+            }
+            it.setNavigationOnClickListener {
                 requireActivity().onBackPressed()
             }
         }

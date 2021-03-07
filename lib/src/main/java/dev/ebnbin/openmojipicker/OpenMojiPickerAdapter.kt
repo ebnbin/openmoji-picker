@@ -39,7 +39,7 @@ internal class OpenMojiPickerAdapter(
             OpenMojiPickerItem.ViewType.GROUP -> {
                 val binding = holder.binding as OpenmojiPickerItemGroupBinding
                 val group = getItem(position).group.notNull()
-                binding.openmojiPickerChip.text = "${group.openMojiGroup.group} (${group.openMojiGroup.openMojiCount})"
+                binding.openmojiPickerChip.text = group.openMojiGroup.group
             }
             OpenMojiPickerItem.ViewType.OPENMOJI -> {
                 val binding = holder.binding as OpenmojiPickerItemOpenmojiBinding

@@ -1,35 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:start="68dp"
-        android:left="68dp"
-        android:bottom="24dp"
-        tools:targetApi="m">
+        android:bottom="24dp">
         <color android:color="?android:attr/colorBackground"/>
     </item>
     <item
-        android:start="67dp"
-        android:left="67dp"
-        android:top="39dp"
-        android:bottom="23dp"
-        tools:targetApi="m">
-        <color android:color="?attr/colorControlNormal"/>
-    </item>
-    <item
-        android:width="68dp"
-        android:bottom="8dp"
-        tools:targetApi="m"
-        tools:ignore="UnusedAttribute">
-        <color android:color="?android:attr/colorBackground"/>
-    </item>
-    <item
-        android:width="69dp"
-        android:top="54dp"
-        android:bottom="8dp"
-        tools:targetApi="m"
-        tools:ignore="UnusedAttribute">
+        android:top="55dp"
+        android:bottom="23dp">
         <color android:color="?attr/colorControlNormal"/>
     </item>
 </layer-list>
