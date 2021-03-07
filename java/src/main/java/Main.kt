@@ -10,7 +10,7 @@ fun main() {
 //    deleteDrawable()
 //    drawableDp()
 //    rename48()
-//    png48()
+//    png24()
 }
 
 private fun openMojiList(): List<OpenMoji> {
@@ -164,15 +164,15 @@ private fun rename48() {
         }
 }
 
-private fun png48() {
+private fun png24() {
     val openMojiNameList = filter()
         .map { "${it.hexcode}.png" }
     File("file/72x72").listFiles()!!
         .filter { openMojiNameList.contains(it.name) }
         .forEach {
             val file = File(
-                "lib/src/main/res-openmoji/drawable-hdpi",
-                "openmoji_48_${it.nameWithoutExtension.toLowerCase(Locale.ROOT).replace("-", "_")}.png",
+                "lib/src/main/res-openmoji/drawable-xxhdpi",
+                "openmoji_24_${it.nameWithoutExtension.toLowerCase(Locale.ROOT).replace("-", "_")}.png",
             )
             it.copyTo(file)
         }
