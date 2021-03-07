@@ -54,8 +54,8 @@ private fun filter(): List<OpenMoji> {
     size = openMojiList.size
 
     openMojiList = openMojiList.filterNot {
-        it.hexcode.contains("200D-2640-FE0F") || // 女 10+7+9+9+13+1+2=51
-                it.hexcode.contains("200D-2642-FE0F") // 男 10+7+9+9+13+1+2=51
+        it.hexcode.contains("200D-2640-FE0F") || // 女 10+7+9+9+13+1+2=51*
+                it.hexcode.contains("200D-2642-FE0F") // 男 10+7+9+9+13+1+2=51*
     }
     println("man woman: ${size - openMojiList.size}, ${openMojiList.size}")
     size = openMojiList.size
@@ -75,18 +75,17 @@ private fun filter(): List<OpenMoji> {
                 it.hexcode == "1F46D" || // 女女握手
                 it.hexcode == "1F46B" || // 女男握手
                 it.hexcode == "1F46C" || // 男男握手
-                it.hexcode == "E2C9" || // 男极地探险
-                it.hexcode == "E2CA" || // 女极地探险
-                it.hexcode == "E186" || // 男咖啡师
-                it.hexcode == "E187" // 女咖啡师
+                it.hexcode == "E2C9" || // 男极地探险*
+                it.hexcode == "E2CA" || // 女极地探险*
+                it.hexcode == "E186" || // 男咖啡师*
+                it.hexcode == "E187" // 女咖啡师*
     }
     println("man woman 3: ${size - openMojiList.size}, ${openMojiList.size}")
     size = openMojiList.size
 
     openMojiList = openMojiList.filterNot {
         it.hexcode == "1F5FE" || // 日本地图
-                it.hexcode == "1F5FB" || // 富士山
-                it.hexcode == "1F201" || // 日本文字按钮
+                it.hexcode == "1F201" || // 日本文字按钮 17
                 it.hexcode == "1F202" || //
                 it.hexcode == "1F237" || //
                 it.hexcode == "1F236" || //
@@ -102,11 +101,28 @@ private fun filter(): List<OpenMoji> {
                 it.hexcode == "3297" || //
                 it.hexcode == "3299" || //
                 it.hexcode == "1F23A" || //
-                it.hexcode == "1F235" || //
-                it.hexcode == "1F38C" // 交叉日本棋
+                it.hexcode == "1F235" //
     }
     println("japan: ${size - openMojiList.size}, ${openMojiList.size}")
     size = openMojiList.size
+
+    openMojiList = openMojiList.filterNot {
+        it.group == "extras-openmoji" // 317-2-2-4=309
+    }
+    println("extras-openmoji: ${size - openMojiList.size}, ${openMojiList.size}")
+    size = openMojiList.size
+
+    openMojiList = openMojiList.filterNot {
+        it.group == "extras-unicode" // 57
+    }
+    println("extras-unicode: ${size - openMojiList.size}, ${openMojiList.size}")
+    size = openMojiList.size
+
+    val map = mutableMapOf<String, Int>()
+    openMojiList.forEach {
+        map[it.group] = map.getOrDefault(it.group, 0) + 1
+    }
+    println(map)
 
     return openMojiList
 }
@@ -128,10 +144,25 @@ private fun openMoji2List() {
 }
 
 private fun deleteDrawable() {
-    val openMojiNameList = filter()
-        .map { "openmoji_${it.hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}.xml" }
+    var openMojiNameList = mutableListOf<String>()
+    openMojiNameList.addAll(
+        filter()
+            .map { "openmoji_${it.hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}.xml" },
+    )
+    openMojiNameList.addAll(
+        filter()
+            .map { "openmoji_48_${it.hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}.xml" },
+    )
     File("lib/src/main/res-openmoji/drawable").listFiles()!!
-        .filter { it.name.startsWith("openmoji_") && !it.name.startsWith("openmoji_icon_") }
+        .filterNot { openMojiNameList.contains(it.name) }
+        .forEach {
+            it.delete()
+        }
+
+    openMojiNameList = filter()
+        .map { "openmoji_24_${it.hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}.png" }
+        .toMutableList()
+    File("lib/src/main/res-openmoji/drawable-xxhdpi").listFiles()!!
         .filterNot { openMojiNameList.contains(it.name) }
         .forEach {
             it.delete()

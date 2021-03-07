@@ -12,7 +12,6 @@ internal class OpenMojiPickerViewModel : ViewModel() {
     init {
         openMojiList.value = OpenMojiCache.openMojiList
             .filterNot { it.group == "flags" && (it.subgroups == "country-flag" || it.subgroups == "subdivision-flag") } // flags
-            .filterNot { it.group == "extras-openmoji" || it.group == "extras-unicode" } // extras
     }
 
     val openMojiMap: LiveData<Map<OpenMojiGroup, List<OpenMoji>>> = Transformations.map(openMojiList) {
