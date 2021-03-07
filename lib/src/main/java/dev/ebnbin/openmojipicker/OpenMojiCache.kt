@@ -40,4 +40,15 @@ object OpenMojiCache {
             }.getOrDefault(0)
         }
     }
+
+    private val drawable24IdMap: MutableMap<String, Int> = mutableMapOf()
+
+    fun getDrawable24Id(hexcode: String): Int {
+        return drawable24IdMap.getOrPut(hexcode) {
+            kotlin.runCatching {
+                val name = "openmoji_24_${hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}"
+                R.drawable::class.java.getField(name).getInt(null)
+            }.getOrDefault(0)
+        }
+    }
 }
