@@ -4,21 +4,38 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import dev.ebnbin.eb.notNull
 
-internal class OpenMojiPickerViewModel(private val openMojiViewModel: OpenMojiViewModel) : ViewModel() {
-    class Factory(private val openMojiViewModel: OpenMojiViewModel) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            @Suppress("UNCHECKED_CAST")
-            return OpenMojiPickerViewModel(openMojiViewModel) as T
-        }
+internal class OpenMojiPickerViewModel : ViewModel() {
+    val openMojiList: MutableLiveData<List<OpenMoji>> = MutableLiveData(emptyList())
+
+    init {
+        openMojiList.value = OpenMojiCache.openMojiList
+            .filterNot { it.group == "flags" && (it.subgroups == "country-flag" || it.subgroups == "subdivision-flag") } // flags
+            .filterNot { it.group == "extras-openmoji" || it.group == "extras-unicode" } // extras
     }
 
-    val openMojiPickerItemList: LiveData<List<OpenMojiPickerItem>> = Transformations.map(openMojiViewModel.openMojiMap) {
+    val openMojiMap: LiveData<Map<OpenMojiGroup, List<OpenMoji>>> = Transformations.map(openMojiList) {
+        val map = linkedMapOf<String, MutableList<OpenMoji>>()
+        openMojiList.value.notNull().forEach {
+            map[it.group] = (map[it.group] ?: mutableListOf()).also { openMojiList ->
+                openMojiList.add(it)
+            }
+        }
+        map
+            .mapKeys { groupEntry ->
+                OpenMojiGroup(
+                    group = groupEntry.key,
+                    openMojiCount = groupEntry.value.size,
+                    openMoji = groupEntry.value.first(),
+                )
+            }
+    }
+
+    val openMojiPickerItemList: LiveData<List<OpenMojiPickerItem>> = Transformations.map(openMojiMap) {
         val list = mutableListOf<OpenMojiPickerItem>()
         var index = 0
-        openMojiViewModel.openMojiMap.value.notNull().forEach { (openMojiGroup, openMojiList) ->
+        openMojiMap.value.notNull().forEach { (openMojiGroup, openMojiList) ->
             list.add(
                 OpenMojiPickerItem(
                     viewType = OpenMojiPickerItem.ViewType.GROUP,

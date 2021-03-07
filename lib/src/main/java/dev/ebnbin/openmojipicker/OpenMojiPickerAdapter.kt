@@ -45,7 +45,7 @@ internal class OpenMojiPickerAdapter(
                 val binding = holder.binding as OpenmojiPickerItemOpenmojiBinding
                 val openMoji = getItem(position).openMoji.notNull()
                 Glide.with(binding.openmojiPickerEmoji)
-                    .load(openMoji.drawable48Id)
+                    .load(OpenMojiCache.getDrawable48Id(openMoji.hexcode))
                     .into(binding.openmojiPickerEmoji)
                 binding.root.isSelected = position == viewModel.selectedPosition.value
                 binding.openmojiPickerEmoji.setOnClickListener {
