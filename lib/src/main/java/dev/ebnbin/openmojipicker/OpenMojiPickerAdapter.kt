@@ -1,6 +1,7 @@
 package dev.ebnbin.openmojipicker
 
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
@@ -54,6 +55,8 @@ internal class OpenMojiPickerAdapter(
                 binding.openmojiPickerEmoji.setOnLongClickListener {
                     listener.openMojiOnLongClick(binding, openMoji, position)
                 }
+                binding.openmojiPickerEmojiCardView.setCardBackgroundColor(
+                    AppCompatResources.getColorStateList(binding.root.context, R.color.openmoji_picker_item_openmoji))
             }
         }
     }
