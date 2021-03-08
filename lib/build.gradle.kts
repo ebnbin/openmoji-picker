@@ -76,11 +76,8 @@ afterEvaluate {
 //*********************************************************************************************************************
 
 dependencies {
-    api(devDependency("eb"))
     api(devDependency("ebui"))
 
-    implementation(dependency("androidx.coordinatorlayout:coordinatorlayout"))
-    implementation(dependency("androidx.constraintlayout:constraintlayout"))
     implementation(dependency("com.google.code.gson:gson"))
     implementation(dependency("com.github.bumptech.glide:glide"))
 }
