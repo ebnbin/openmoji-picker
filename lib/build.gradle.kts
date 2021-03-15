@@ -55,6 +55,5 @@ afterEvaluate {
 dependencies {
     api(Dependencies.comGithubEbnbin_ebui.devNotation(project))
 
-    implementation(Dependencies.comGoogleCodeGson_gson.notation())
     implementation(Dependencies.comGithubBumptechGlide_glide.notation())
 }
