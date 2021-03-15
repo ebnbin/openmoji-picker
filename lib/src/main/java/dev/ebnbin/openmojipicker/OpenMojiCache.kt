@@ -40,4 +40,8 @@ object OpenMojiCache {
             }.getOrDefault(0)
         }
     }
+
+    fun random(): OpenMoji {
+        return openMojiList.random()
+    }
 }
