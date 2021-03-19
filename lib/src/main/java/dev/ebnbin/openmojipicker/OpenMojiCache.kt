@@ -44,4 +44,8 @@ object OpenMojiCache {
     fun random(): OpenMoji {
         return openMojiList.random()
     }
+
+    fun first(): OpenMoji {
+        return openMojiList.first()
+    }
 }
