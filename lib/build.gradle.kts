@@ -39,7 +39,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.0-beta03"
+        kotlinCompilerExtensionVersion = Versions.compose
     }
 }
 
@@ -57,7 +57,7 @@ afterEvaluate {
 //*********************************************************************************************************************
 
 dependencies {
-    api(Dependencies.comGithubDevEbnbin_ebui.devNotation(project))
+    api(Dependencies.comGithubDevEbnbin_ebui.notation(project, "0.0.18"))
 
     implementation(Dependencies.comGithubBumptechGlide_glide.notation())
 }
