@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath(Dependencies.comAndroidToolsBuild_gradle.notation("7.0.0-alpha12"))
@@ -12,6 +12,7 @@ buildscript {
 allprojects {
     repositories {
         google()
+        mavenCentral()
         jcenter()
         maven("https://jitpack.io")
     }
