@@ -15,7 +15,7 @@ import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 import kotlin.math.min
 
-internal class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
+class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
     private val viewModel: OpenMojiPickerViewModel by viewModels()
 
     private val spanSizeGridLayoutManagerViewModel: SpanSizeGridLayoutManagerViewModel by viewModels()
