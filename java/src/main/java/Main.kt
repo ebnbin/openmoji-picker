@@ -7,7 +7,7 @@ fun main() {
 //    json()
 //    filter()
 //    openMoji2List()
-//    filterCopy()
+    filterCopy()
 //    resourceName()
 //    deleteDrawable()
 //    drawableDp()
@@ -169,7 +169,7 @@ private fun filterCopy() {
                 .contains(xmlFile.name)
         }
         .forEach {
-            it.copyTo(File("lib/src/main/res-openmoji/drawable-xhdpi", "openmoji_36_${it.nameWithoutExtension.toLowerCase(Locale.ROOT).replace(Regex("[^0-9_a-z]"), "_")}.png"), overwrite = true)
+            it.copyTo(File("lib/src/main/res-openmoji/drawable-xxhdpi", "openmoji_24_${it.nameWithoutExtension.toLowerCase(Locale.ROOT).replace(Regex("[^0-9_a-z]"), "_")}.png"), overwrite = true)
         }
 }
 
