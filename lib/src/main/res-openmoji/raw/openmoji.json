@@ -1428,11 +1428,39 @@
     "annotation": "child"
   },
   {
+    "emoji": "👦",
+    "hexcode": "1F466",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "boy"
+  },
+  {
+    "emoji": "👧",
+    "hexcode": "1F467",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "girl"
+  },
+  {
     "emoji": "🧑",
     "hexcode": "1F9D1",
     "group": "people-body",
     "subgroups": "person",
     "annotation": "person"
+  },
+  {
+    "emoji": "👱",
+    "hexcode": "1F471",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "person: blond hair"
+  },
+  {
+    "emoji": "👨",
+    "hexcode": "1F468",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "man"
   },
   {
     "emoji": "🧔",
@@ -1442,11 +1470,60 @@
     "annotation": "man: beard"
   },
   {
+    "emoji": "👩",
+    "hexcode": "1F469",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "woman"
+  },
+  {
+    "emoji": "🧑‍🦰",
+    "hexcode": "1F9D1-200D-1F9B0",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "person: red hair"
+  },
+  {
+    "emoji": "🧑‍🦱",
+    "hexcode": "1F9D1-200D-1F9B1",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "person: curly hair"
+  },
+  {
+    "emoji": "🧑‍🦳",
+    "hexcode": "1F9D1-200D-1F9B3",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "person: white hair"
+  },
+  {
+    "emoji": "🧑‍🦲",
+    "hexcode": "1F9D1-200D-1F9B2",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "person: bald"
+  },
+  {
     "emoji": "🧓",
     "hexcode": "1F9D3",
     "group": "people-body",
     "subgroups": "person",
     "annotation": "older person"
+  },
+  {
+    "emoji": "👴",
+    "hexcode": "1F474",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "old man"
+  },
+  {
+    "emoji": "👵",
+    "hexcode": "1F475",
+    "group": "people-body",
+    "subgroups": "person",
+    "annotation": "old woman"
   },
   {
     "emoji": "🙍",
@@ -2077,6 +2154,27 @@
     "group": "people-body",
     "subgroups": "family",
     "annotation": "people holding hands"
+  },
+  {
+    "emoji": "👭",
+    "hexcode": "1F46D",
+    "group": "people-body",
+    "subgroups": "family",
+    "annotation": "women holding hands"
+  },
+  {
+    "emoji": "👫",
+    "hexcode": "1F46B",
+    "group": "people-body",
+    "subgroups": "family",
+    "annotation": "woman and man holding hands"
+  },
+  {
+    "emoji": "👬",
+    "hexcode": "1F46C",
+    "group": "people-body",
+    "subgroups": "family",
+    "annotation": "men holding hands"
   },
   {
     "emoji": "💏",
@@ -4051,6 +4149,13 @@
     "group": "travel-places",
     "subgroups": "place-map",
     "annotation": "world map"
+  },
+  {
+    "emoji": "🗾",
+    "hexcode": "1F5FE",
+    "group": "travel-places",
+    "subgroups": "place-map",
+    "annotation": "map of Japan"
   },
   {
     "emoji": "🧭",
