@@ -31,6 +31,18 @@ private fun filter(): List<OpenMoji> {
     println(openMojiList.size)
     var size = openMojiList.size
 
+    openMojiList = openMojiList.filterNot {
+        it.group == "extras-openmoji" // 317
+    }
+    println("extras-openmoji: ${size - openMojiList.size}, ${openMojiList.size}")
+    size = openMojiList.size
+
+    openMojiList = openMojiList.filterNot {
+        it.group == "extras-unicode" // 57
+    }
+    println("extras-unicode: ${size - openMojiList.size}, ${openMojiList.size}")
+    size = openMojiList.size
+
     openMojiList = openMojiList.filter {
         it.skintone.isEmpty() // 皮肤 1490
     }
@@ -44,47 +56,53 @@ private fun filter(): List<OpenMoji> {
     size = openMojiList.size
 
     openMojiList = openMojiList.filterNot {
-        it.hexcode.contains("1F9B0") || // 红发 3+1=4
-                it.hexcode.contains("1F9B1") || // 卷发 3+1=4
-                it.hexcode.contains("1F9B2") || // 光头 3+1=4
-                it.hexcode.contains("1F9B3") || // 白发 3+1=4
-                it.hexcode.contains("1F471") // 金发 3
+        it.group == "component" && it.subgroups == "hair-style" // 发型 4
     }
     println("hair-style: ${size - openMojiList.size}, ${openMojiList.size}")
     size = openMojiList.size
 
+//    openMojiList = openMojiList.filterNot {
+//        it.hexcode.contains("1F9B0") || // 红发 3+1=4
+//                it.hexcode.contains("1F9B1") || // 卷发 3+1=4
+//                it.hexcode.contains("1F9B2") || // 光头 3+1=4
+//                it.hexcode.contains("1F9B3") || // 白发 3+1=4
+//                it.hexcode.contains("1F471") // 金发 3
+//    }
+//    println("hair-style: ${size - openMojiList.size}, ${openMojiList.size}")
+//    size = openMojiList.size
+
     openMojiList = openMojiList.filterNot {
-        it.hexcode.contains("200D-2640-FE0F") || // 女 10+7+9+9+13+1+2=51*
-                it.hexcode.contains("200D-2642-FE0F") // 男 10+7+9+9+13+1+2=51*
+        it.hexcode.contains("200D-2640-FE0F") || // 女 10+7+9+9+13+1=49+1(金发)=50
+                it.hexcode.contains("200D-2642-FE0F") // 男 10+7+9+9+13+1=49+1(金发)=50
     }
     println("man woman: ${size - openMojiList.size}, ${openMojiList.size}")
     size = openMojiList.size
 
     openMojiList = openMojiList.filterNot {
-        it.hexcode.contains("1F468") || // 男 1+17+3+19=40
-                it.hexcode.contains("1F469") // 女 1+17+3+19=40, 重复 7, 男女共 73
+        it.hexcode != "1F468" && it.hexcode.contains("1F468") || // 男 17+3+19=39+4(各种发型)=43
+                it.hexcode != "1F469" && it.hexcode.contains("1F469") // 女 17+3+19=39+4(各种发型)=43, 重复 7, 男女共 79
     }
     println("man woman 2: ${size - openMojiList.size}, ${openMojiList.size}")
     size = openMojiList.size
 
-    openMojiList = openMojiList.filterNot {
-        it.hexcode == "1F466" || // 男孩
-                it.hexcode == "1F467" || // 女孩
-                it.hexcode == "1F474" || // 男老人
-                it.hexcode == "1F475" || // 女老人
-                it.hexcode == "1F46D" || // 女女握手
-                it.hexcode == "1F46B" || // 女男握手
-                it.hexcode == "1F46C" || // 男男握手
-                it.hexcode == "E2C9" || // 男极地探险*
-                it.hexcode == "E2CA" || // 女极地探险*
-                it.hexcode == "E186" || // 男咖啡师*
-                it.hexcode == "E187" // 女咖啡师*
-    }
-    println("man woman 3: ${size - openMojiList.size}, ${openMojiList.size}")
-    size = openMojiList.size
+//    openMojiList = openMojiList.filterNot {
+//        it.hexcode == "1F466" || // 男孩
+//                it.hexcode == "1F467" || // 女孩
+//                it.hexcode == "1F474" || // 男老人
+//                it.hexcode == "1F475" || // 女老人
+//                it.hexcode == "1F46D" || // 女女握手
+//                it.hexcode == "1F46B" || // 女男握手
+//                it.hexcode == "1F46C" // 男男握手
+//                it.hexcode == "E2C9" || // 男极地探险*
+//                it.hexcode == "E2CA" || // 女极地探险*
+//                it.hexcode == "E186" || // 男咖啡师*
+//                it.hexcode == "E187" // 女咖啡师*
+//    }
+//    println("man woman 3: ${size - openMojiList.size}, ${openMojiList.size}")
+//    size = openMojiList.size
 
     openMojiList = openMojiList.filterNot {
-        it.hexcode == "1F5FE" || // 日本地图
+//        it.hexcode == "1F5FE" || // 日本地图
                 it.hexcode == "1F201" || // 日本文字按钮 17
                 it.hexcode == "1F202" || //
                 it.hexcode == "1F237" || //
@@ -104,18 +122,6 @@ private fun filter(): List<OpenMoji> {
                 it.hexcode == "1F235" //
     }
     println("japan: ${size - openMojiList.size}, ${openMojiList.size}")
-    size = openMojiList.size
-
-    openMojiList = openMojiList.filterNot {
-        it.group == "extras-openmoji" // 317-2-2-4=309
-    }
-    println("extras-openmoji: ${size - openMojiList.size}, ${openMojiList.size}")
-    size = openMojiList.size
-
-    openMojiList = openMojiList.filterNot {
-        it.group == "extras-unicode" // 57
-    }
-    println("extras-unicode: ${size - openMojiList.size}, ${openMojiList.size}")
     size = openMojiList.size
 
     val map = mutableMapOf<String, Int>()
