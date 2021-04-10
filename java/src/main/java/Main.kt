@@ -7,6 +7,7 @@ fun main() {
 //    json()
 //    filter()
 //    openMoji2List()
+//    filterCopy()
 //    deleteDrawable()
 //    drawableDp()
 //    rename48()
@@ -147,6 +148,28 @@ private fun openMoji2List() {
         )
     }
     File("file", "openmoji2.json").writeText(GsonBuilder().setPrettyPrinting().create().toJson(openMoji2List))
+}
+
+private fun filterCopy() {
+    val filterList = filter()
+    File("file/xml").listFiles()!!
+        .filter { xmlFile ->
+            filterList
+                .map { "openmoji_${it.hexcode.toLowerCase(Locale.ROOT).replace(Regex("[^0-9_a-z]"), "_")}.xml" }
+                .contains(xmlFile.name)
+        }
+        .forEach {
+            it.copyTo(File("lib/src/main/res-openmoji/drawable", it.name), overwrite = true)
+        }
+    File("file/72x72").listFiles()!!
+        .filter { xmlFile ->
+            filterList
+                .map { "${it.hexcode}.png" }
+                .contains(xmlFile.name)
+        }
+        .forEach {
+            it.copyTo(File("lib/src/main/res-openmoji/drawable-xhdpi", "openmoji_36_${it.nameWithoutExtension.toLowerCase(Locale.ROOT).replace(Regex("[^0-9_a-z]"), "_")}.png"), overwrite = true)
+        }
 }
 
 private fun deleteDrawable() {
