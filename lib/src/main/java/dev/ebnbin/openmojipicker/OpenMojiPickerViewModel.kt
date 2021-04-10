@@ -11,7 +11,6 @@ internal class OpenMojiPickerViewModel : ViewModel() {
 
     init {
         openMojiList.value = OpenMojiCache.openMojiList
-            .filterNot { it.group == "flags" && (it.subgroups == "country-flag" || it.subgroups == "subdivision-flag") } // flags
     }
 
     val openMojiMap: LiveData<Map<OpenMojiGroup, List<OpenMoji>>> = Transformations.map(openMojiList) {
