@@ -7,7 +7,7 @@ fun main() {
 //    json()
 //    filter()
 //    openMoji2List()
-    filterCopy()
+//    filterCopy()
 //    resourceName()
 //    deleteDrawable()
 //    drawableDp()
