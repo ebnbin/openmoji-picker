@@ -11,7 +11,7 @@ internal class OpenMojiPickerLayoutManager(
 ) : SpanSizeGridLayoutManager(
     context,
     viewModel,
-    spanSize = 56f,
+    spanSize = 48f,
 ) {
     override fun onAttachedToWindow(view: RecyclerView?) {
         super.onAttachedToWindow(view)
