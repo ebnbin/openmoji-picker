@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="72dp"
     android:height="72dp"
     android:viewportWidth="72.0"
-    android:viewportHeight="72.0">
+    android:viewportHeight="72.0"
+    tools:ignore="ResourceName">
     <path
         android:pathData="M55,61V57c0,-4.99 -5.01,-9 -10,-9c-6,5 -12,5 -18,0c-4.99,0 -10,4.01 -10,9v4H55z"
         android:fillColor="#92D3F5"/>

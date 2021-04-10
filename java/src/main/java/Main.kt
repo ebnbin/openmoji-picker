@@ -8,6 +8,7 @@ fun main() {
 //    filter()
 //    openMoji2List()
 //    filterCopy()
+//    resourceName()
 //    deleteDrawable()
 //    drawableDp()
 //    rename48()
@@ -170,6 +171,26 @@ private fun filterCopy() {
         .forEach {
             it.copyTo(File("lib/src/main/res-openmoji/drawable-xhdpi", "openmoji_36_${it.nameWithoutExtension.toLowerCase(Locale.ROOT).replace(Regex("[^0-9_a-z]"), "_")}.png"), overwrite = true)
         }
+}
+
+private fun resourceName() {
+    File("lib/src/main/res-openmoji/drawable").listFiles()!!.forEach {
+        it.writeText(it.readText().replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<vector\n" +
+                "    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n" +
+                "    android:width=\"72dp\"\n" +
+                "    android:height=\"72dp\"\n" +
+                "    android:viewportWidth=\"72.0\"\n" +
+                "    android:viewportHeight=\"72.0\">\n", "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<vector\n" +
+                "    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n" +
+                "    xmlns:tools=\"http://schemas.android.com/tools\"\n" +
+                "    android:width=\"72dp\"\n" +
+                "    android:height=\"72dp\"\n" +
+                "    android:viewportWidth=\"72.0\"\n" +
+                "    android:viewportHeight=\"72.0\"\n" +
+                "    tools:ignore=\"ResourceName\">\n"))
+    }
 }
 
 private fun deleteDrawable() {

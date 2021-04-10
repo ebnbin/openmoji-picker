@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="72dp"
     android:height="72dp"
     android:viewportWidth="72.0"
-    android:viewportHeight="72.0">
+    android:viewportHeight="72.0"
+    tools:ignore="ResourceName">
     <path
         android:pathData="M20.77,30.42l-3.71,4.1c0.68,-7.71 5.64,-14.36 12.96,-17.01c2.13,-0.77 4.35,-1.17 6.6,-1.17c5.48,0 10.76,2.38 14.48,6.52l0.61,0.68l3.86,-3.61l-0.61,-0.68C50.25,14.01 43.57,11 36.63,11c-2.85,0 -5.66,0.5 -8.36,1.48C19.07,15.82 12.71,24.3 11.84,34.06L8.55,30.42L5.2,33.54l9.45,10.45l9.45,-10.45L20.77,30.42z"
         android:strokeLineCap="round"
