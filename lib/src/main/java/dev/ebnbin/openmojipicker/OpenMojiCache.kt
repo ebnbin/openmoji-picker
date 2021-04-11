@@ -8,7 +8,7 @@ import java.util.Locale
 object OpenMojiCache {
     internal val openMojiList: List<OpenMoji> by lazy {
         GsonBuilder().create().fromJson(
-            app.resources.openRawResource(R.raw.openmoji).bufferedReader(),
+            app.assets.open("openmoji.json").bufferedReader(),
             object : TypeToken<List<OpenMoji>>() {}.type,
         )
     }
