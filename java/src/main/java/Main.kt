@@ -9,6 +9,7 @@ fun main() {
 //    openMoji2List()
 //    filterCopy()
 //    resourceName()
+//    drawableId()
 //    deleteDrawable()
 //    drawableDp()
 //    rename48()
@@ -191,6 +192,13 @@ private fun resourceName() {
                 "    android:viewportHeight=\"72.0\"\n" +
                 "    tools:ignore=\"ResourceName\">\n"))
     }
+}
+
+private fun drawableId() {
+    val text = filter().joinToString("\n") {
+        "\"${it.hexcode}\" to (R.drawable.openmoji_${it.hexcode.toLowerCase(Locale.ROOT).replace("-", "_")} to R.drawable.openmoji_24_${it.hexcode.toLowerCase(Locale.ROOT).replace("-", "_")}),"
+    }
+    println(text)
 }
 
 private fun deleteDrawable() {
