@@ -10,7 +10,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
     val openMojiList: MutableLiveData<List<OpenMoji>> = MutableLiveData(emptyList())
 
     init {
-        openMojiList.value = OpenMojiCache.openMojiList
+        openMojiList.value = OpenMoji.allList
     }
 
     val openMojiMap: LiveData<Map<OpenMojiGroup, List<OpenMoji>>> = Transformations.map(openMojiList) {
