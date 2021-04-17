@@ -33,11 +33,27 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         layoutManager = OpenMojiPickerLayoutManager(requireContext(), spanSizeGridLayoutManagerViewModel)
         adapter = OpenMojiPickerAdapter(this)
-        viewModel.openMojiPickerItemList.observe(viewLifecycleOwner) {
+        viewModel.itemList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
         binding.openmojiPickerToolbar.let {
+            val enableRecentMenuItem = it.menu.findItem(R.id.openmoji_picker_enable_recent)
+            enableRecentMenuItem.setOnMenuItemClickListener {
+                OpenMojiPickerPrefs.enable_recent.value = !OpenMojiPickerPrefs.enable_recent.value
+                true
+            }
+            OpenMojiPickerPrefs.enable_recent.observe(viewLifecycleOwner) { enableRecent ->
+                enableRecentMenuItem.isChecked = enableRecent
+            }
+            val clearRecentMenuItem = it.menu.findItem(R.id.openmoji_picker_clear_recent)
+            OpenMojiPickerPrefs.recent.observe(viewLifecycleOwner) { recent ->
+                clearRecentMenuItem.isVisible = recent.isNotEmpty()
+            }
+            clearRecentMenuItem.setOnMenuItemClickListener {
+                viewModel.clearRecent()
+                true
+            }
             it.setNavigationOnClickListener {
                 requireActivity().onBackPressed()
             }
@@ -47,13 +63,16 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
             it.adapter = adapter
             it.addItemDecoration(
                 HeaderItemDecoration(it) { itemPosition ->
-                    viewModel.openMojiPickerItemList.value.notNull()[itemPosition].viewType == OpenMojiPickerItem.ViewType.GROUP
+                    viewModel.itemList.value.notNull()[itemPosition].viewType == OpenMojiPickerItem.ViewType.GROUP
                 },
             )
         }
     }
 
     override fun openMojiOnClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int) {
+        if (OpenMojiPickerPrefs.enable_recent.value) {
+            viewModel.saveRecent(openMoji)
+        }
         requireActivity().setResult(
             Activity.RESULT_OK,
             Intent().putExtras(

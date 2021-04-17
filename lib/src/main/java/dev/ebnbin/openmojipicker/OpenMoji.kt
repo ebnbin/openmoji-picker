@@ -29,22 +29,6 @@ data class OpenMoji(
         return DRAWABLE_ID_MAP.getValue(hexcode).second
     }
 
-    @StringRes
-    fun getGroupStringId(): Int {
-        return when (group) {
-            "smileys-emotion" -> R.string.openmoji_group_smileys_emotion
-            "people-body" -> R.string.openmoji_group_people_body
-            "animals-nature" -> R.string.openmoji_group_animals_nature
-            "food-drink" -> R.string.openmoji_group_food_drink
-            "travel-places" -> R.string.openmoji_group_travel_places
-            "activities" -> R.string.openmoji_group_activities
-            "objects" -> R.string.openmoji_group_objects
-            "symbols" -> R.string.openmoji_group_symbols
-            "flags" -> R.string.openmoji_group_flags
-            else -> e()
-        }
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
