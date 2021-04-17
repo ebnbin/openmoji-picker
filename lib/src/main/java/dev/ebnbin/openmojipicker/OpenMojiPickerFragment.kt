@@ -47,8 +47,8 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
                 enableRecentMenuItem.isChecked = enableRecent
             }
             val clearRecentMenuItem = it.menu.findItem(R.id.openmoji_picker_clear_recent)
-            OpenMojiPickerPrefs.recentList.observe(viewLifecycleOwner) { recent ->
-                clearRecentMenuItem.isVisible = recent.isNotEmpty()
+            viewModel.hasRecent.observe(viewLifecycleOwner) { hasRecent ->
+                clearRecentMenuItem.isVisible = hasRecent
             }
             clearRecentMenuItem.setOnMenuItemClickListener {
                 viewModel.clearRecent()
