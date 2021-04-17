@@ -54,11 +54,25 @@ internal class OpenMojiPickerViewModel : ViewModel() {
             }
     }
 
+    val saveRecent: LiveData<Boolean> = OpenMojiPickerPrefs.saveRecent.map {
+        it
+    }
+
+    fun toggleSaveRecent() {
+        if (OpenMojiPickerPrefs.saveRecent.value) {
+            clearRecent()
+        }
+        OpenMojiPickerPrefs.saveRecent.value = !OpenMojiPickerPrefs.saveRecent.value
+    }
+
     val hasRecent: LiveData<Boolean> = OpenMojiPickerPrefs.recentList.map {
         it.isNotEmpty()
     }
 
     fun saveRecent(openMoji: OpenMoji) {
+        if (!OpenMojiPickerPrefs.saveRecent.value) {
+            return
+        }
         val recentList = OpenMojiPickerPrefs.recentList.value
         val list = mutableListOf<String>()
         if (recentList.isNotEmpty()) {
