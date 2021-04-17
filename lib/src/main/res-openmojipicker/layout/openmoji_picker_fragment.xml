@@ -24,15 +24,4 @@
         app:navigationIconTint="?attr/colorControlNormal"
         app:menu="@menu/openmoji_picker_toolbar"/>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/openmoji_picker_pick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:text="选择图标"
-        android:textColor="?attr/colorOnPrimary"
-        app:icon="@drawable/ebui_material_check"
-        app:iconTint="?attr/colorOnPrimary"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

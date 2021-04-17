@@ -56,10 +56,4 @@ internal class OpenMojiPickerViewModel : ViewModel() {
         }
         list
     }
-
-    val openMojiGroupList: LiveData<List<OpenMojiPickerItem>> = Transformations.map(openMojiPickerItemList) {
-        openMojiPickerItemList.value.notNull().filter { it.viewType == OpenMojiPickerItem.ViewType.GROUP }
-    }
-
-    val selectedPosition: MutableLiveData<Int?> = MutableLiveData(null)
 }

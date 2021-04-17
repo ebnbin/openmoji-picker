@@ -9,7 +9,6 @@
         android:id="@+id/openmoji_picker_emoji_card_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:cardBackgroundColor="@color/openmoji_picker_item_openmoji"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="0dp"

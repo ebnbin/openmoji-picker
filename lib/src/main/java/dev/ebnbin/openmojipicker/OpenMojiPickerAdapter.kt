@@ -13,7 +13,6 @@ import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemGroupBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 
 internal class OpenMojiPickerAdapter(
-    private val viewModel: OpenMojiPickerViewModel,
     private val listener: Listener,
 ) : ListAdapter<OpenMojiPickerItem, BindingViewHolder<ViewBinding>>(
     object : DiffUtil.ItemCallback<OpenMojiPickerItem>() {
@@ -48,7 +47,6 @@ internal class OpenMojiPickerAdapter(
                 Glide.with(binding.openmojiPickerEmoji)
                     .load(openMoji.getDrawableId24())
                     .into(binding.openmojiPickerEmoji)
-                binding.root.isSelected = position == viewModel.selectedPosition.value
                 binding.openmojiPickerEmoji.setOnClickListener {
                     listener.openMojiOnClick(binding, openMoji, position)
                 }
