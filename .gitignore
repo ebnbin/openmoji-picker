@@ -4,7 +4,7 @@
 /build/
 /buildSrc/.gradle/
 /buildSrc/build/
-/java/build/
+/kotlin/build/
 /lib/build/
 /local.properties
 gitignore/

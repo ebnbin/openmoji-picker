@@ -1,5 +1,3 @@
-import com.google.gson.GsonBuilder
-
 data class OpenMoji2(
     val emoji: String,
     val hexcode: String,
@@ -27,13 +25,5 @@ data class OpenMoji2(
 
     override fun hashCode(): Int {
         return hexcode.hashCode()
-    }
-
-    fun toJson(prettyPrinting: Boolean = true): String {
-        return GsonBuilder().also {
-            if (prettyPrinting) {
-                it.setPrettyPrinting()
-            }
-        }.create().toJson(this)
     }
 }

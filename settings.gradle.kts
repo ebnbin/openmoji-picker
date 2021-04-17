@@ -18,4 +18,4 @@ include(":lib")
 
 devInclude("eb", "ebui")
 
-include(":java")
+include(":kotlin")
