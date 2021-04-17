@@ -88,29 +88,6 @@ private fun filter(): List<OpenMoji> {
                 println("gender2: ${list.size - it.size}, ${it.size}")
             }
         }
-        .let { list ->
-            list.filterNot {
-                it.hexcode == "1F201" || // 日本文字按钮 17
-                        it.hexcode == "1F202" ||
-                        it.hexcode == "1F237" ||
-                        it.hexcode == "1F236" ||
-                        it.hexcode == "1F22F" ||
-                        it.hexcode == "1F250" ||
-                        it.hexcode == "1F239" ||
-                        it.hexcode == "1F21A" ||
-                        it.hexcode == "1F232" ||
-                        it.hexcode == "1F251" ||
-                        it.hexcode == "1F238" ||
-                        it.hexcode == "1F234" ||
-                        it.hexcode == "1F233" ||
-                        it.hexcode == "3297" ||
-                        it.hexcode == "3299" ||
-                        it.hexcode == "1F23A" ||
-                        it.hexcode == "1F235"
-            }.also {
-                println("japan: ${list.size - it.size}, ${it.size}")
-            }
-        }
 }
 
 private fun writeJsonFiltered() {

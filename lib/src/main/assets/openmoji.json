@@ -9142,6 +9142,125 @@
     "annotation": "VS button"
   },
   {
+    "emoji": "🈁",
+    "hexcode": "1F201",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “here” button"
+  },
+  {
+    "emoji": "🈂️",
+    "hexcode": "1F202",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “service charge” button"
+  },
+  {
+    "emoji": "🈷️",
+    "hexcode": "1F237",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “monthly amount” button"
+  },
+  {
+    "emoji": "🈶",
+    "hexcode": "1F236",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “not free of charge” button"
+  },
+  {
+    "emoji": "🈯️",
+    "hexcode": "1F22F",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “reserved” button"
+  },
+  {
+    "emoji": "🉐",
+    "hexcode": "1F250",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “bargain” button"
+  },
+  {
+    "emoji": "🈹",
+    "hexcode": "1F239",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “discount” button"
+  },
+  {
+    "emoji": "🈚️",
+    "hexcode": "1F21A",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “free of charge” button"
+  },
+  {
+    "emoji": "🈲",
+    "hexcode": "1F232",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “prohibited” button"
+  },
+  {
+    "emoji": "🉑",
+    "hexcode": "1F251",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “acceptable” button"
+  },
+  {
+    "emoji": "🈸",
+    "hexcode": "1F238",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “application” button"
+  },
+  {
+    "emoji": "🈴",
+    "hexcode": "1F234",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “passing grade” button"
+  },
+  {
+    "emoji": "🈳",
+    "hexcode": "1F233",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “vacancy” button"
+  },
+  {
+    "emoji": "㊗️",
+    "hexcode": "3297",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “congratulations” button"
+  },
+  {
+    "emoji": "㊙️",
+    "hexcode": "3299",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “secret” button"
+  },
+  {
+    "emoji": "🈺",
+    "hexcode": "1F23A",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “open for business” button"
+  },
+  {
+    "emoji": "🈵",
+    "hexcode": "1F235",
+    "group": "symbols",
+    "subgroups": "alphanum",
+    "annotation": "Japanese “no vacancy” button"
+  },
+  {
     "emoji": "🔴",
     "hexcode": "1F534",
     "group": "symbols",
