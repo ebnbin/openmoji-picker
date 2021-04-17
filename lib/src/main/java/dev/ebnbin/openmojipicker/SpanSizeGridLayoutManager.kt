@@ -33,6 +33,7 @@ internal open class SpanSizeGridLayoutManager(
     override fun onAttachedToWindow(view: RecyclerView?) {
         super.onAttachedToWindow(view)
         requireNotNull(view)
+        viewModel.mutableIsLayoutFinished.value = false
         val visibility = view.visibility
         view.isInvisible = true
         view.addOnScrollListener(onScrollListener)
@@ -42,13 +43,14 @@ internal open class SpanSizeGridLayoutManager(
             } else {
                 0
             }
-            view.doOnNextLayout {
-                view.visibility = visibility
-            }
             spanCount = max(1, (recyclerViewSize / spanSize.dpToPx).toInt())
             val scrollPosition = viewModel.scrollPosition.value.notNull()
             val scrollOffset = viewModel.scrollOffset.value.notNull()
             scrollToPositionWithOffset(scrollPosition, scrollOffset)
+            view.doOnNextLayout {
+                view.visibility = visibility
+                viewModel.mutableIsLayoutFinished.value = true
+            }
         }
     }
 

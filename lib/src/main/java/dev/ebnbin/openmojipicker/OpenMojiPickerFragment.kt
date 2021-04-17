@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dev.ebnbin.eb.notNull
@@ -33,6 +34,10 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         layoutManager = OpenMojiPickerLayoutManager(requireContext(), spanSizeGridLayoutManagerViewModel)
         adapter = OpenMojiPickerAdapter(this)
+        spanSizeGridLayoutManagerViewModel.isLayoutFinished.observe(viewLifecycleOwner) {
+            binding.openmojiPickerProgressBar.isVisible = !it
+        }
+
         viewModel.itemList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }

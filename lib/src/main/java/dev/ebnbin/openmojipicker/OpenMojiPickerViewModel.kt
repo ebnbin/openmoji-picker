@@ -2,8 +2,8 @@ package dev.ebnbin.openmojipicker
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import dev.ebnbin.eb.notNull
 
 internal class OpenMojiPickerViewModel : ViewModel() {
@@ -32,7 +32,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
             }
         }
 
-    val itemList: LiveData<List<OpenMojiPickerItem>> = Transformations.map(dataMap) {
+    val itemList: LiveData<List<OpenMojiPickerItem>> = dataMap.map {
         it
             .filterNot { (_, openMojiList) ->
                 openMojiList.isEmpty()
@@ -52,7 +52,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
             }
     }
 
-    val hasRecent: LiveData<Boolean> = Transformations.map(OpenMojiPickerPrefs.recentList) {
+    val hasRecent: LiveData<Boolean> = OpenMojiPickerPrefs.recentList.map {
         it.isNotEmpty()
     }
 
