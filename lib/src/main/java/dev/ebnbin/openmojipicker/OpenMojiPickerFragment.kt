@@ -84,14 +84,6 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
         requireActivity().finish()
     }
 
-    override fun openMojiOnLongClick(
-        binding: OpenmojiPickerItemOpenmojiBinding,
-        openMoji: OpenMoji,
-        position: Int
-    ): Boolean {
-        return false
-    }
-
     companion object {
         const val KEY_OPENMOJI = "openmoji"
     }
