@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import dev.ebnbin.eb.notNull
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerFragmentBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
+import dev.ebnbin.openmojipicker.internal.HeaderItemDecoration
 import dev.ebnbin.openmojipicker.internal.OpenMojiPickerAdapter
 import dev.ebnbin.openmojipicker.internal.OpenMojiPickerItem
 import dev.ebnbin.openmojipicker.internal.OpenMojiPickerLayoutManager

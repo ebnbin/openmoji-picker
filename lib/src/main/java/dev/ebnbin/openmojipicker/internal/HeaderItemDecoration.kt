@@ -1,4 +1,4 @@
-package dev.ebnbin.openmojipicker
+package dev.ebnbin.openmojipicker.internal
 
 /*
 solution based on - based on Sevastyan answer on StackOverflow
@@ -15,15 +15,21 @@ Source:
 https://stackoverflow.com/questions/32949971/how-can-i-make-sticky-headers-in-recyclerview-without-external-lib/44327350#44327350
 */
 
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Rect
+import android.graphics.RectF
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class HeaderItemDecoration(
+/**
+ * Import from [https://gist.github.com/filipkowicz/1a769001fae407b8813ab4387c42fcbd].
+ */
+internal class HeaderItemDecoration(
     parent: RecyclerView,
     private val shouldFadeOutHeader: Boolean = false,
+    private val shouldMoveOutHeader: Boolean = false,
     private val isHeader: (itemPosition: Int) -> Boolean
 ) : RecyclerView.ItemDecoration() {
 
@@ -71,7 +77,7 @@ class HeaderItemDecoration(
         val contactPoint = headerView.bottom + parent.paddingTop
         val childInContact = getChildInContact(parent, contactPoint) ?: return
 
-        if (isHeader(parent.getChildAdapterPosition(childInContact))) {
+        if (shouldMoveOutHeader && isHeader(parent.getChildAdapterPosition(childInContact))) {
             moveHeader(c, headerView, childInContact, parent.paddingTop)
             return
         }
@@ -113,18 +119,10 @@ class HeaderItemDecoration(
         if (!shouldFadeOutHeader) {
             c.clipRect(0, paddingTop, c.width, paddingTop + currentHeader.height)
         } else {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                c.saveLayerAlpha(
-                    RectF(0f, 0f, c.width.toFloat(), c.height.toFloat()),
-                    (((nextHeader.top - paddingTop) / nextHeader.height.toFloat()) * 255).toInt()
-                )
-            } else {
-                c.saveLayerAlpha(
-                    0f, 0f, c.width.toFloat(), c.height.toFloat(),
-                    (((nextHeader.top - paddingTop) / nextHeader.height.toFloat()) * 255).toInt(),
-                    Canvas.ALL_SAVE_FLAG
-                )
-            }
+            c.saveLayerAlpha(
+                RectF(0f, 0f, c.width.toFloat(), c.height.toFloat()),
+                (((nextHeader.top - paddingTop) / nextHeader.height.toFloat()) * 255).toInt()
+            )
 
         }
         c.translate(0f, (nextHeader.top - currentHeader.height).toFloat() /*+ paddingTop*/)
@@ -195,7 +193,7 @@ class HeaderItemDecoration(
     }
 }
 
-inline fun View.doOnEachNextLayout(crossinline action: (view: View) -> Unit) {
+private inline fun View.doOnEachNextLayout(crossinline action: (view: View) -> Unit) {
     addOnLayoutChangeListener { view, _, _, _, _, _, _, _, _ ->
         action(
             view
