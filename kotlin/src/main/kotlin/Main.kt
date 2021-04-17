@@ -25,11 +25,6 @@ private val openMojiList: List<OpenMoji> by lazy {
 
 private fun json() {
     println(openMojiList)
-    val groupSet = linkedSetOf<String>()
-    openMojiList.forEach {
-        groupSet.add(it.group)
-    }
-    println("group: $groupSet")
 }
 
 private fun filter(): List<OpenMoji> {
@@ -87,6 +82,18 @@ private fun filter(): List<OpenMoji> {
             }.also {
                 println("gender2: ${list.size - it.size}, ${it.size}")
             }
+        }
+        .also {
+            val groupMap = linkedMapOf<String, MutableList<OpenMoji>>()
+            it.forEach { openMoji ->
+                groupMap[openMoji.group] = groupMap.getOrDefault(openMoji.group, mutableListOf()).also { list ->
+                    list.add(openMoji)
+                }
+            }
+            val groupList = groupMap.map { (key, value) ->
+                key to value.size
+            }
+            println("groupList: $groupList")
         }
 }
 

@@ -3,11 +3,9 @@ package dev.ebnbin.openmojipicker
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import androidx.annotation.Keep
-import androidx.annotation.StringRes
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import dev.ebnbin.eb.app
-import dev.ebnbin.eb.e
 import kotlinx.parcelize.Parcelize
 
 @Keep
