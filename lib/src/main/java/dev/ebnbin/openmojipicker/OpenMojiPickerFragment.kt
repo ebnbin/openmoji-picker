@@ -116,7 +116,7 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
                     Activity.RESULT_OK,
                     Intent().putExtras(
                         bundleOf(
-                            OpenMojiPickerActivity.KEY_OPENMOJI to openMoji
+                            KEY_OPENMOJI to openMoji
                         ),
                     ),
                 )
@@ -155,5 +155,9 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
         position: Int
     ): Boolean {
         return false
+    }
+
+    companion object {
+        const val KEY_OPENMOJI = "openmoji"
     }
 }
