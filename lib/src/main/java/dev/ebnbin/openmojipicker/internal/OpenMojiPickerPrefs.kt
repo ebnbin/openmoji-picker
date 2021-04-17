@@ -1,4 +1,4 @@
-package dev.ebnbin.openmojipicker
+package dev.ebnbin.openmojipicker.internal
 
 import dev.ebnbin.eb.Pref
 import dev.ebnbin.eb.Prefs

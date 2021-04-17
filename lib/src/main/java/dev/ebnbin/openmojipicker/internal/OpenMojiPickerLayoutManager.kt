@@ -1,4 +1,4 @@
-package dev.ebnbin.openmojipicker
+package dev.ebnbin.openmojipicker.internal
 
 import android.content.Context
 import androidx.recyclerview.widget.GridLayoutManager

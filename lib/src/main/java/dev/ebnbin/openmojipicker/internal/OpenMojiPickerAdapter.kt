@@ -1,4 +1,4 @@
-package dev.ebnbin.openmojipicker
+package dev.ebnbin.openmojipicker.internal
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import dev.ebnbin.eb.layoutInflater
 import dev.ebnbin.eb.notNull
 import dev.ebnbin.ebui.BindingViewHolder
+import dev.ebnbin.openmojipicker.OpenMoji
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiGroupBinding
 

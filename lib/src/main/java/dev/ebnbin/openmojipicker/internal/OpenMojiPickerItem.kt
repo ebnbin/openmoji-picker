@@ -1,6 +1,8 @@
-package dev.ebnbin.openmojipicker
+package dev.ebnbin.openmojipicker.internal
 
 import androidx.recyclerview.widget.DiffUtil
+import dev.ebnbin.openmojipicker.OpenMoji
+import dev.ebnbin.openmojipicker.OpenMojiGroup
 
 internal data class OpenMojiPickerItem(
     val viewType: ViewType,

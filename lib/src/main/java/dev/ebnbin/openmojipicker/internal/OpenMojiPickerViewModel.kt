@@ -1,10 +1,12 @@
-package dev.ebnbin.openmojipicker
+package dev.ebnbin.openmojipicker.internal
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import dev.ebnbin.eb.notNull
+import dev.ebnbin.openmojipicker.OpenMoji
+import dev.ebnbin.openmojipicker.OpenMojiGroup
 
 internal class OpenMojiPickerViewModel : ViewModel() {
     private val dataMap: LiveData<out Map<OpenMojiGroup, List<OpenMoji>>> =
@@ -12,7 +14,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
             val value = linkedMapOf<OpenMojiGroup, MutableList<OpenMoji>>()
             value[OpenMojiGroup.RECENT] = mutableListOf()
             OpenMoji.allList.forEach { openMoji ->
-                val openMojiGroup = OpenMojiGroup.of(openMoji.group)
+                val openMojiGroup = openMoji.getOpenMojiGroup()
                 value[openMojiGroup] = (value[openMojiGroup] ?: mutableListOf()).also { openMojiList ->
                     openMojiList.add(openMoji)
                 }

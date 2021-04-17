@@ -1,4 +1,4 @@
-package dev.ebnbin.openmojipicker
+package dev.ebnbin.openmojipicker.internal
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

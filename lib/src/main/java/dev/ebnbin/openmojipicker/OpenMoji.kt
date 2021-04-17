@@ -17,6 +17,10 @@ data class OpenMoji(
     val subgroups: String,
     val annotation: String,
 ) : Parcelable {
+    fun getOpenMojiGroup(): OpenMojiGroup {
+        return OpenMojiGroup.of(group)
+    }
+
     @DrawableRes
     fun getDrawableId(): Int {
         return DRAWABLE_ID_MAP.getValue(hexcode).first

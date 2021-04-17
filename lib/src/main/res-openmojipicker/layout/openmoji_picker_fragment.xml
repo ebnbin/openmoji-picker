@@ -11,12 +11,6 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"/>
 
-    <ProgressBar
-        android:id="@+id/openmoji_picker_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/openmoji_picker_toolbar"
         android:layout_width="match_parent"
@@ -24,5 +18,11 @@
         app:navigationIcon="@drawable/ebui_material_arrow_back"
         app:navigationIconTint="?attr/colorControlNormal"
         app:menu="@menu/openmoji_picker_toolbar"/>
+
+    <ProgressBar
+        android:id="@+id/openmoji_picker_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </FrameLayout>

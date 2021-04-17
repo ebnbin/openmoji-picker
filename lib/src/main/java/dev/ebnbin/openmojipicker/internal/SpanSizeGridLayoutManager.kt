@@ -1,4 +1,4 @@
-package dev.ebnbin.openmojipicker
+package dev.ebnbin.openmojipicker.internal
 
 import android.content.Context
 import androidx.core.view.doOnLayout
@@ -17,8 +17,8 @@ import kotlin.math.max
  */
 internal open class SpanSizeGridLayoutManager(
     context: Context,
-    val viewModel: SpanSizeGridLayoutManagerViewModel,
-    val spanSize: Float,
+    private val viewModel: SpanSizeGridLayoutManagerViewModel,
+    private val spanSize: Float,
 ) : GridLayoutManager(context, 1, VERTICAL, false) {
     private val onScrollListener: RecyclerView.OnScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
