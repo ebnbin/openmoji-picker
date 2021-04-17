@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
+    <string name="openmoji_group_smileys_emotion" tools:ignore="ResourceName">Smileys Emotion</string>
+    <string name="openmoji_group_people_body" tools:ignore="ResourceName">People Body</string>
+    <string name="openmoji_group_animals_nature" tools:ignore="ResourceName">Animals Nature</string>
+    <string name="openmoji_group_food_drink" tools:ignore="ResourceName">Food Drink</string>
+    <string name="openmoji_group_travel_places" tools:ignore="ResourceName">Travel Places</string>
+    <string name="openmoji_group_activities" tools:ignore="ResourceName">Activities</string>
+    <string name="openmoji_group_objects" tools:ignore="ResourceName">Objects</string>
+    <string name="openmoji_group_symbols" tools:ignore="ResourceName">Symbols</string>
+    <string name="openmoji_group_flags" tools:ignore="ResourceName">Flags</string>
+</resources>

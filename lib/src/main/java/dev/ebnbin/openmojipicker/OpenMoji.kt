@@ -1,10 +1,13 @@
 package dev.ebnbin.openmojipicker
 
 import android.os.Parcelable
+import androidx.annotation.DrawableRes
 import androidx.annotation.Keep
+import androidx.annotation.StringRes
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import dev.ebnbin.eb.app
+import dev.ebnbin.eb.e
 import kotlinx.parcelize.Parcelize
 
 @Keep
@@ -16,12 +19,30 @@ data class OpenMoji(
     val subgroups: String,
     val annotation: String,
 ) : Parcelable {
+    @DrawableRes
     fun getDrawableId(): Int {
         return DRAWABLE_ID_MAP.getValue(hexcode).first
     }
 
+    @DrawableRes
     fun getDrawableId24(): Int {
         return DRAWABLE_ID_MAP.getValue(hexcode).second
+    }
+
+    @StringRes
+    fun getGroupStringId(): Int {
+        return when (group) {
+            "smileys-emotion" -> R.string.openmoji_group_smileys_emotion
+            "people-body" -> R.string.openmoji_group_people_body
+            "animals-nature" -> R.string.openmoji_group_animals_nature
+            "food-drink" -> R.string.openmoji_group_food_drink
+            "travel-places" -> R.string.openmoji_group_travel_places
+            "activities" -> R.string.openmoji_group_activities
+            "objects" -> R.string.openmoji_group_objects
+            "symbols" -> R.string.openmoji_group_symbols
+            "flags" -> R.string.openmoji_group_flags
+            else -> e()
+        }
     }
 
     override fun equals(other: Any?): Boolean {
@@ -47,6 +68,10 @@ data class OpenMoji(
             allList
                 .map { it.hexcode to it }
                 .toMap(linkedMapOf())
+        }
+
+        fun random(): OpenMoji {
+            return allList.random()
         }
 
         private val DRAWABLE_ID_MAP = mapOf(

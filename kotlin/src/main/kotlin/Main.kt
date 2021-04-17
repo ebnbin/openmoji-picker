@@ -25,6 +25,11 @@ private val openMojiList: List<OpenMoji> by lazy {
 
 private fun json() {
     println(openMojiList)
+    val groupSet = linkedSetOf<String>()
+    openMojiList.forEach {
+        groupSet.add(it.group)
+    }
+    println("group: $groupSet")
 }
 
 private fun filter(): List<OpenMoji> {
