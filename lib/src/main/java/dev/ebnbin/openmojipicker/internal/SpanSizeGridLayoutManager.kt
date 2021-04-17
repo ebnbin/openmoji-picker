@@ -51,6 +51,9 @@ internal open class SpanSizeGridLayoutManager(
                 view.visibility = visibility
                 viewModel.mutableIsLayoutFinished.value = true
             }
+            view.post {
+                view.requestLayout()
+            }
         }
     }
 
