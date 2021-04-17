@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/openmoji_picker_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,11 +9,7 @@
         android:id="@+id/openmoji_picker_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="80dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        android:scrollbarStyle="outsideOverlay"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+        android:scrollbars="vertical"/>
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/openmoji_picker_toolbar"
@@ -24,4 +19,4 @@
         app:navigationIconTint="?attr/colorControlNormal"
         app:menu="@menu/openmoji_picker_toolbar"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

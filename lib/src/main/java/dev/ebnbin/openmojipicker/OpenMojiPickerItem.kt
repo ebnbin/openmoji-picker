@@ -2,11 +2,11 @@ package dev.ebnbin.openmojipicker
 
 internal data class OpenMojiPickerItem(
     val viewType: ViewType,
-    val group: OpenMojiGroup? = null,
+    val openMojiGroup: OpenMojiGroup? = null,
     val openMoji: OpenMoji? = null,
 ) {
     enum class ViewType {
-        GROUP,
+        OPENMOJI_GROUP,
         OPENMOJI;
 
         companion object {

@@ -7,6 +7,6 @@ import dev.ebnbin.eb.appId
 internal object OpenMojiPickerPrefs : Prefs() {
     override val prefName: String = "$appId.openmojipicker"
 
-    val recentEnabled: Pref<Boolean> = createPref("recent_enabled", true)
+    val saveRecent: Pref<Boolean> = createPref("save_recent", true)
     val recentList: Pref<String> = createPref("recent_list", "")
 }

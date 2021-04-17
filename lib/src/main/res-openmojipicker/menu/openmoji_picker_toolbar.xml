@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/openmoji_picker_enable_recent"
-        android:title="保存最近使用"
+        android:id="@+id/openmoji_picker_save_recent"
+        android:title="@string/openmoji_picker_save_recent"
         android:checkable="true"
         app:showAsAction="never"/>
     <item
         android:id="@+id/openmoji_picker_clear_recent"
-        android:title="清除最近使用"/>
+        android:title="@string/openmoji_picker_clear_recent"
+        app:showAsAction="never"/>
 </menu>

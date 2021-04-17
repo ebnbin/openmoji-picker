@@ -2,12 +2,14 @@
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:bottom="24dp">
-        <color android:color="?android:attr/colorBackground"/>
+        android:bottom="23dp">
+        <color
+            android:color="?android:attr/colorBackground"/>
     </item>
     <item
         android:top="55dp"
         android:bottom="23dp">
-        <color android:color="?attr/colorControlNormal"/>
+        <color
+            android:color="?attr/colorControlNormal"/>
     </item>
 </layer-list>

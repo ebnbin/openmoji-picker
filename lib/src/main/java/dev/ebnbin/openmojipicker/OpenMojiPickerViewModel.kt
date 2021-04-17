@@ -44,8 +44,8 @@ internal class OpenMojiPickerViewModel : ViewModel() {
         dataMap.value.notNull().forEach { (openMojiGroup, openMojiList) ->
             list.add(
                 OpenMojiPickerItem(
-                    viewType = OpenMojiPickerItem.ViewType.GROUP,
-                    group = openMojiGroup,
+                    viewType = OpenMojiPickerItem.ViewType.OPENMOJI_GROUP,
+                    openMojiGroup = openMojiGroup,
                 ),
             )
             openMojiList.forEach { openMoji ->

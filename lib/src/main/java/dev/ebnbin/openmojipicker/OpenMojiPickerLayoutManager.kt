@@ -20,7 +20,7 @@ internal class OpenMojiPickerLayoutManager(
             override fun getSpanSize(position: Int): Int {
                 val adapter = view.adapter.notNull()
                 return when (OpenMojiPickerItem.ViewType.of(adapter.getItemViewType(position))) {
-                    OpenMojiPickerItem.ViewType.GROUP -> spanCount
+                    OpenMojiPickerItem.ViewType.OPENMOJI_GROUP -> spanCount
                     OpenMojiPickerItem.ViewType.OPENMOJI -> 1
                 }
             }

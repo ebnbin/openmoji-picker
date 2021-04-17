@@ -10,4 +10,7 @@
     <string name="openmoji_picker_group_objects">物体</string>
     <string name="openmoji_picker_group_symbols">符号</string>
     <string name="openmoji_picker_group_flags">旗帜</string>
+
+    <string name="openmoji_picker_save_recent">保存最近使用</string>
+    <string name="openmoji_picker_clear_recent">清除最近使用</string>
 </resources>

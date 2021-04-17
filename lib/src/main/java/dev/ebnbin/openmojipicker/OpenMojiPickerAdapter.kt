@@ -1,7 +1,6 @@
 package dev.ebnbin.openmojipicker
 
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
@@ -9,8 +8,8 @@ import com.bumptech.glide.Glide
 import dev.ebnbin.eb.layoutInflater
 import dev.ebnbin.eb.notNull
 import dev.ebnbin.ebui.BindingViewHolder
-import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemGroupBinding
 import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiBinding
+import dev.ebnbin.openmojipicker.databinding.OpenmojiPickerItemOpenmojiGroupBinding
 
 internal class OpenMojiPickerAdapter(
     private val listener: Listener,
@@ -28,7 +27,7 @@ internal class OpenMojiPickerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<ViewBinding> {
         val layoutInflater = parent.context.layoutInflater
         val binding = when (OpenMojiPickerItem.ViewType.of(viewType)) {
-            OpenMojiPickerItem.ViewType.GROUP -> OpenmojiPickerItemGroupBinding.inflate(layoutInflater, parent, false)
+            OpenMojiPickerItem.ViewType.OPENMOJI_GROUP -> OpenmojiPickerItemOpenmojiGroupBinding.inflate(layoutInflater, parent, false)
             OpenMojiPickerItem.ViewType.OPENMOJI -> OpenmojiPickerItemOpenmojiBinding.inflate(layoutInflater, parent, false)
         }
         return BindingViewHolder(binding)
@@ -36,9 +35,9 @@ internal class OpenMojiPickerAdapter(
 
     override fun onBindViewHolder(holder: BindingViewHolder<ViewBinding>, position: Int) {
         when (OpenMojiPickerItem.ViewType.of(getItemViewType(position))) {
-            OpenMojiPickerItem.ViewType.GROUP -> {
-                val binding = holder.binding as OpenmojiPickerItemGroupBinding
-                val group = getItem(position).group.notNull()
+            OpenMojiPickerItem.ViewType.OPENMOJI_GROUP -> {
+                val binding = holder.binding as OpenmojiPickerItemOpenmojiGroupBinding
+                val group = getItem(position).openMojiGroup.notNull()
                 binding.openmojiPickerChip.setText(group.stringId)
             }
             OpenMojiPickerItem.ViewType.OPENMOJI -> {
@@ -53,8 +52,6 @@ internal class OpenMojiPickerAdapter(
                 binding.openmojiPickerEmoji.setOnLongClickListener {
                     listener.openMojiOnLongClick(binding, openMoji, position)
                 }
-                binding.openmojiPickerEmojiCardView.setCardBackgroundColor(
-                    AppCompatResources.getColorStateList(binding.root.context, R.color.openmoji_picker_item_openmoji))
             }
         }
     }

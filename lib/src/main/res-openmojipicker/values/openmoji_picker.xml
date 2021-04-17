@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="openmoji_picker_group_recent">Recently Used</string>
+    <string name="openmoji_picker_group_recent">Recently used</string>
     <string name="openmoji_picker_group_smileys_emotion">Smileys</string>
     <string name="openmoji_picker_group_people_body">People</string>
     <string name="openmoji_picker_group_animals_nature">Animals &amp; Nature</string>
@@ -10,4 +10,7 @@
     <string name="openmoji_picker_group_objects">Objects</string>
     <string name="openmoji_picker_group_symbols">Symbols</string>
     <string name="openmoji_picker_group_flags">Flags</string>
+
+    <string name="openmoji_picker_save_recent">Save recently used</string>
+    <string name="openmoji_picker_clear_recent">Clear recently used</string>
 </resources>

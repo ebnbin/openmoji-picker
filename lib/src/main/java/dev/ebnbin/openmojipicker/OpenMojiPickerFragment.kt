@@ -38,12 +38,12 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
         }
 
         binding.openmojiPickerToolbar.let {
-            val enableRecentMenuItem = it.menu.findItem(R.id.openmoji_picker_enable_recent)
+            val enableRecentMenuItem = it.menu.findItem(R.id.openmoji_picker_save_recent)
             enableRecentMenuItem.setOnMenuItemClickListener {
-                OpenMojiPickerPrefs.recentEnabled.value = !OpenMojiPickerPrefs.recentEnabled.value
+                OpenMojiPickerPrefs.saveRecent.value = !OpenMojiPickerPrefs.saveRecent.value
                 true
             }
-            OpenMojiPickerPrefs.recentEnabled.observe(viewLifecycleOwner) { enableRecent ->
+            OpenMojiPickerPrefs.saveRecent.observe(viewLifecycleOwner) { enableRecent ->
                 enableRecentMenuItem.isChecked = enableRecent
             }
             val clearRecentMenuItem = it.menu.findItem(R.id.openmoji_picker_clear_recent)
@@ -63,14 +63,14 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
             it.adapter = adapter
             it.addItemDecoration(
                 HeaderItemDecoration(it) { itemPosition ->
-                    viewModel.itemList.value.notNull()[itemPosition].viewType == OpenMojiPickerItem.ViewType.GROUP
+                    viewModel.itemList.value.notNull()[itemPosition].viewType == OpenMojiPickerItem.ViewType.OPENMOJI_GROUP
                 },
             )
         }
     }
 
     override fun openMojiOnClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int) {
-        if (OpenMojiPickerPrefs.recentEnabled.value) {
+        if (OpenMojiPickerPrefs.saveRecent.value) {
             viewModel.saveRecent(openMoji)
         }
         requireActivity().setResult(
