@@ -52,7 +52,7 @@ afterEvaluate {
 //*********************************************************************************************************************
 
 dependencies {
-    api(Dependencies.comGithubDevEbnbin_ebui.notation(project, "0.0.19"))
+    api(Dependencies.devEbnbin_ebui.notation(project, "0.0.20"))
 
     implementation(Dependencies.comGithubBumptechGlide_glide.notation())
 }
