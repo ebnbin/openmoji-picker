@@ -40,14 +40,14 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
         binding.openmojiPickerToolbar.let {
             val enableRecentMenuItem = it.menu.findItem(R.id.openmoji_picker_enable_recent)
             enableRecentMenuItem.setOnMenuItemClickListener {
-                OpenMojiPickerPrefs.enable_recent.value = !OpenMojiPickerPrefs.enable_recent.value
+                OpenMojiPickerPrefs.recentEnabled.value = !OpenMojiPickerPrefs.recentEnabled.value
                 true
             }
-            OpenMojiPickerPrefs.enable_recent.observe(viewLifecycleOwner) { enableRecent ->
+            OpenMojiPickerPrefs.recentEnabled.observe(viewLifecycleOwner) { enableRecent ->
                 enableRecentMenuItem.isChecked = enableRecent
             }
             val clearRecentMenuItem = it.menu.findItem(R.id.openmoji_picker_clear_recent)
-            OpenMojiPickerPrefs.recent.observe(viewLifecycleOwner) { recent ->
+            OpenMojiPickerPrefs.recentList.observe(viewLifecycleOwner) { recent ->
                 clearRecentMenuItem.isVisible = recent.isNotEmpty()
             }
             clearRecentMenuItem.setOnMenuItemClickListener {
@@ -70,7 +70,7 @@ class OpenMojiPickerFragment : Fragment(), OpenMojiPickerAdapter.Listener {
     }
 
     override fun openMojiOnClick(binding: OpenmojiPickerItemOpenmojiBinding, openMoji: OpenMoji, position: Int) {
-        if (OpenMojiPickerPrefs.enable_recent.value) {
+        if (OpenMojiPickerPrefs.recentEnabled.value) {
             viewModel.saveRecent(openMoji)
         }
         requireActivity().setResult(

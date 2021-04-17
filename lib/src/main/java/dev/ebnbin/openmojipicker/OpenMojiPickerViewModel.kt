@@ -19,7 +19,7 @@ internal class OpenMojiPickerViewModel : ViewModel() {
 
     private fun loadDataMap() {
         val map = linkedMapOf<OpenMojiGroup, MutableList<OpenMoji>>()
-        val recent = OpenMojiPickerPrefs.recent.value
+        val recent = OpenMojiPickerPrefs.recentList.value
         if (recent.isNotEmpty()) {
             recent
                 .split(",")
@@ -61,18 +61,18 @@ internal class OpenMojiPickerViewModel : ViewModel() {
     }
 
     fun saveRecent(openMoji: OpenMoji) {
-        val recent = OpenMojiPickerPrefs.recent.value
+        val recent = OpenMojiPickerPrefs.recentList.value
         val list = mutableListOf<String>()
         if (recent.isNotEmpty()) {
             list.addAll(recent.split(","))
         }
         list.remove(openMoji.hexcode)
         list.add(0, openMoji.hexcode)
-        OpenMojiPickerPrefs.recent.value = list.take(RECENT_MAX).joinToString(",")
+        OpenMojiPickerPrefs.recentList.value = list.take(RECENT_MAX).joinToString(",")
     }
 
     fun clearRecent() {
-        OpenMojiPickerPrefs.recent.value = ""
+        OpenMojiPickerPrefs.recentList.value = ""
         loadDataMap()
     }
 
